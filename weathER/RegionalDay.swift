@@ -14,7 +14,7 @@ struct RegionalDay: Codable, Identifiable, Hashable {
     
     public var readableDay: String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "it")
+        dateFormatter.locale = Locale.current
         dateFormatter.setLocalizedDateFormatFromTemplate("EEEE d MMMM")
         
         return dateFormatter.string(from: day)
@@ -22,7 +22,7 @@ struct RegionalDay: Codable, Identifiable, Hashable {
     
     public var readableUpdatedAt: String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "it")
+        dateFormatter.locale = Locale.current
         dateFormatter.setLocalizedDateFormatFromTemplate("dd/MM/yyyy HH:mm:ss")
         
         return dateFormatter.string(from: updatedAt)

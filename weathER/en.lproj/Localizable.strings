@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  weathER
+
+  Created by Andrea Martini on 25/02/21.
+  
+*/
+
+
+"Previsione del %@" = "Forecast %@";

@@ -13,6 +13,7 @@
 		6551BC5925E8018200FC4468 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6551BC5825E8018200FC4468 /* Preview Assets.xcassets */; };
 		6551BC6425E8018300FC4468 /* weathERTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BC6325E8018300FC4468 /* weathERTests.swift */; };
 		6551BC6F25E8018300FC4468 /* weathERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BC6E25E8018300FC4468 /* weathERUITests.swift */; };
+		656B87BB25E83D5C002E04B4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 656B87BD25E83D5C002E04B4 /* Localizable.strings */; };
 		6584A89325E8083700F03261 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6584A89225E8083700F03261 /* Alamofire */; };
 		6584A8A625E80A9100F03261 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6584A8A325E80A9100F03261 /* Forecast.swift */; };
 		6584A8A825E80A9100F03261 /* RegionalDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6584A8A525E80A9100F03261 /* RegionalDay.swift */; };
@@ -49,6 +50,8 @@
 		6551BC6A25E8018300FC4468 /* weathERUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = weathERUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6551BC6E25E8018300FC4468 /* weathERUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weathERUITests.swift; sourceTree = "<group>"; };
 		6551BC7025E8018300FC4468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		656B87BC25E83D5C002E04B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		656B87C125E83D60002E04B4 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6584A8A325E80A9100F03261 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		6584A8A525E80A9100F03261 /* RegionalDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionalDay.swift; sourceTree = "<group>"; };
 		6584A8AC25E8207E00F03261 /* RegionalDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionalDayView.swift; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 				6551BC5525E8018200FC4468 /* Assets.xcassets */,
 				6551BC5A25E8018200FC4468 /* Info.plist */,
 				6551BC5725E8018200FC4468 /* Preview Content */,
+				656B87BD25E83D5C002E04B4 /* Localizable.strings */,
 			);
 			path = weathER;
 			sourceTree = "<group>";
@@ -229,6 +233,7 @@
 			knownRegions = (
 				en,
 				Base,
+				it,
 			);
 			mainGroup = 6551BC4525E8018100FC4468;
 			packageReferences = (
@@ -251,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6551BC5925E8018200FC4468 /* Preview Assets.xcassets in Resources */,
+				656B87BB25E83D5C002E04B4 /* Localizable.strings in Resources */,
 				6551BC5625E8018200FC4468 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +320,18 @@
 			targetProxy = 6551BC6B25E8018300FC4468 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		656B87BD25E83D5C002E04B4 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				656B87BC25E83D5C002E04B4 /* en */,
+				656B87C125E83D60002E04B4 /* it */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6551BC7125E8018300FC4468 /* Debug */ = {
