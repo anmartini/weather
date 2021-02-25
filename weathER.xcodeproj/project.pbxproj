@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,10 @@
 		6551BC5925E8018200FC4468 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6551BC5825E8018200FC4468 /* Preview Assets.xcassets */; };
 		6551BC6425E8018300FC4468 /* weathERTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BC6325E8018300FC4468 /* weathERTests.swift */; };
 		6551BC6F25E8018300FC4468 /* weathERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BC6E25E8018300FC4468 /* weathERUITests.swift */; };
+		6584A89325E8083700F03261 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6584A89225E8083700F03261 /* Alamofire */; };
+		6584A8A625E80A9100F03261 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6584A8A325E80A9100F03261 /* Forecast.swift */; };
+		6584A8A825E80A9100F03261 /* RegionalDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6584A8A525E80A9100F03261 /* RegionalDay.swift */; };
+		6584A8AD25E8207E00F03261 /* RegionalDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6584A8AC25E8207E00F03261 /* RegionalDayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +49,9 @@
 		6551BC6A25E8018300FC4468 /* weathERUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = weathERUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6551BC6E25E8018300FC4468 /* weathERUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weathERUITests.swift; sourceTree = "<group>"; };
 		6551BC7025E8018300FC4468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6584A8A325E80A9100F03261 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		6584A8A525E80A9100F03261 /* RegionalDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionalDay.swift; sourceTree = "<group>"; };
+		6584A8AC25E8207E00F03261 /* RegionalDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionalDayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6584A89325E8083700F03261 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				6551BC5125E8018100FC4468 /* weathERApp.swift */,
+				6584A8A325E80A9100F03261 /* Forecast.swift */,
+				6584A8A525E80A9100F03261 /* RegionalDay.swift */,
 				6551BC5325E8018100FC4468 /* ContentView.swift */,
+				6584A8AC25E8207E00F03261 /* RegionalDayView.swift */,
 				6551BC5525E8018200FC4468 /* Assets.xcassets */,
 				6551BC5A25E8018200FC4468 /* Info.plist */,
 				6551BC5725E8018200FC4468 /* Preview Content */,
@@ -146,6 +157,9 @@
 			dependencies = (
 			);
 			name = weathER;
+			packageProductDependencies = (
+				6584A89225E8083700F03261 /* Alamofire */,
+			);
 			productName = weathER;
 			productReference = 6551BC4E25E8018100FC4468 /* weathER.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +231,9 @@
 				Base,
 			);
 			mainGroup = 6551BC4525E8018100FC4468;
+			packageReferences = (
+				6584A89125E8083700F03261 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 6551BC4F25E8018100FC4468 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,6 +277,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6551BC5425E8018100FC4468 /* ContentView.swift in Sources */,
+				6584A8A625E80A9100F03261 /* Forecast.swift in Sources */,
+				6584A8A825E80A9100F03261 /* RegionalDay.swift in Sources */,
+				6584A8AD25E8207E00F03261 /* RegionalDayView.swift in Sources */,
 				6551BC5225E8018100FC4468 /* weathERApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +600,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6584A89125E8083700F03261 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6584A89225E8083700F03261 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6584A89125E8083700F03261 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6551BC4625E8018100FC4468 /* Project object */;
 }
