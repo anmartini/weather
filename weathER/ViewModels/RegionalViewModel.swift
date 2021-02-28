@@ -1,5 +1,5 @@
 //
-//  WeatherViewModel.swift
+//  RegionalViewModel.swift
 //  weathER
 //
 //  Created by Roberto Casula on 28/02/21.
@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-class WeatherViewModel: ObservableObject {
+class RegionalViewModel: ObservableObject {
     
     private let weatherService: WeatherService
     private var cancellables = Set<AnyCancellable>()
@@ -21,7 +21,7 @@ class WeatherViewModel: ObservableObject {
     }
     
     func loadData() {
-        self.weatherService.getWeatherData()
+        self.weatherService.getRegionalDays()
             .receive(on: RunLoop.main)
             .sink { value in
                 self.regionalDays = value.sorted(by: { $0.day.compare($1.day) == .orderedAscending })

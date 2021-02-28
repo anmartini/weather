@@ -12,11 +12,25 @@ import Alamofire
 struct ContentView: View {
         
     var body: some View {
-        NavigationView {
-            WeatherView()
-                .navigationTitle("Meteo Arpae")
+        TabView() {
+            NavigationView {
+                RegionalView()
+                    .navigationTitle("Regione")
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .tabItem {
+                Label("Regione", systemImage: "map.fill")
+            }
+            
+            NavigationView {
+                CountryView()
+                    .navigationTitle("Bologna")
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .tabItem {
+                Label("Bologna", systemImage: "mappin.circle.fill")
+            }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     

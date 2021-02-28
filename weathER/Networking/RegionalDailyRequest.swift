@@ -1,5 +1,5 @@
 //
-//  DailyWeatherRequest.swift
+//  RegionalDailyRequest.swift
 //  weathER
 //
 //  Created by Roberto Casula on 28/02/21.
@@ -9,7 +9,7 @@ import Combine
 import Alamofire
 import Foundation
 
-struct DailyWeatherRequest {
+struct RegionalDailyRequest {
     
     static let path: String = "/daily/region/days/{day}"
     

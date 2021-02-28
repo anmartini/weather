@@ -1,5 +1,5 @@
 //
-//  WeatherView.swift
+//  RegionalView.swift
 //  weathER
 //
 //  Created by Roberto Casula on 28/02/21.
@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-struct WeatherView: View {
+struct RegionalView: View {
     
-    @ObservedObject var viewModel = WeatherViewModel()
+    @ObservedObject var viewModel = RegionalViewModel()
     
     var body: some View {
         List {
             ForEach(viewModel.regionalDays, id: \.self) { regionalDay in
                 RegionalDayView(regionalDay: regionalDay)
-                    .padding(.vertical)
             }
         }
         .onAppear() {
@@ -28,8 +27,8 @@ struct WeatherView: View {
     }
 }
 
-struct WeatherView_Previews: PreviewProvider {
+struct RegionalView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherView()
+        RegionalView()
     }
 }

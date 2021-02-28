@@ -10,13 +10,26 @@ import Foundation
 
 public class WeatherService {
         
-    func getWeatherData() -> AnyPublisher<[RegionalDay], Never> {
-        let weather1 = DailyWeatherRequest.requestFuture(for: "1")
+    func getRegionalDays() -> AnyPublisher<[RegionalDay], Never> {
+        let weather1 = RegionalDailyRequest.requestFuture(for: "1")
                             .catch { _ in Empty<RegionalDay, Never>() }
-        let weather2 = DailyWeatherRequest.requestFuture(for: "2")
+        let weather2 = RegionalDailyRequest.requestFuture(for: "2")
                             .catch { _ in Empty<RegionalDay, Never>() }
-        let weather3 = DailyWeatherRequest.requestFuture(for: "3")
+        let weather3 = RegionalDailyRequest.requestFuture(for: "3")
                             .catch { _ in Empty<RegionalDay, Never>() }
+        
+        return Publishers.MergeMany([weather1, weather2, weather3])
+                         .collect()
+                         .eraseToAnyPublisher()
+    }
+    
+    func getCountryDays() -> AnyPublisher<[CountryDay], Never> {
+        let weather1 = CountryDailyRequest.requestFuture(for: "1", country: "BO")
+                            .catch { _ in Empty<CountryDay, Never>() }
+        let weather2 = CountryDailyRequest.requestFuture(for: "2", country: "BO")
+                            .catch { _ in Empty<CountryDay, Never>() }
+        let weather3 = CountryDailyRequest.requestFuture(for: "3", country: "BO")
+                            .catch { _ in Empty<CountryDay, Never>() }
         
         return Publishers.MergeMany([weather1, weather2, weather3])
                          .collect()
