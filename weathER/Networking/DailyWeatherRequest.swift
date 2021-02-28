@@ -5,6 +5,7 @@
 //  Created by Roberto Casula on 28/02/21.
 //
 
+import Combine
 import Alamofire
 import Foundation
 
@@ -18,5 +19,13 @@ struct DailyWeatherRequest {
         BaseRequest.request(path.replacingOccurrences(of: "{day}", with: day),
                             decoder: decoder,
                             completion: completion)
+    }
+    
+    static func requestFuture(for day: String) -> Future<RegionalDay, Error>{
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return BaseRequest.requestFuture(path.replacingOccurrences(of: "{day}", with: day),
+                                         of: RegionalDay.self,
+                                         decoder: decoder)
     }
 }
