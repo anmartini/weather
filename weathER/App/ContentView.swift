@@ -28,20 +28,15 @@ struct ContentView: View {
     }
     
     func loadData() {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        
-        AF.request("https://meteo.kyntos.it/api/daily/region/days/1").responseDecodable(of: RegionalDay.self, decoder: decoder) { response in
+        DailyWeatherRequest.request(for: "1") { response in
             regionalDays.append(response.value!)
             regionalDays = regionalDays.sorted(by: { $0.day.compare($1.day) == .orderedAscending })
         }
-        
-        AF.request("https://meteo.kyntos.it/api/daily/region/days/2").responseDecodable(of: RegionalDay.self, decoder: decoder) { response in
+        DailyWeatherRequest.request(for: "2") { response in
             regionalDays.append(response.value!)
             regionalDays = regionalDays.sorted(by: { $0.day.compare($1.day) == .orderedAscending })
         }
-        
-        AF.request("https://meteo.kyntos.it/api/daily/region/days/3").responseDecodable(of: RegionalDay.self, decoder: decoder) { response in
+        DailyWeatherRequest.request(for: "3") { response in
             regionalDays.append(response.value!)
             regionalDays = regionalDays.sorted(by: { $0.day.compare($1.day) == .orderedAscending })
         }
