@@ -8,11 +8,11 @@
 import Foundation
 
 extension String {
-    func HTMLStripped() -> String {
+    func htmlStripped() -> String {
       return self.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
 
-    mutating func HTMLStrip() {
-      self = self.HTMLStripped()
+    mutating func htmlStrip() {
+      self = self.htmlStripped()
     }
 }

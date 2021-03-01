@@ -20,16 +20,16 @@ struct ContentView: View {
             .navigationViewStyle(StackNavigationViewStyle())
             .tabItem {
                 Label("Regione", systemImage: "map.fill")
-            }
+            }.accentColor(.white)
             
             NavigationView {
-                CountryView()
-                    .navigationTitle("Bologna")
+                CountriesView()
+                    .navigationTitle("Province")
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .tabItem {
-                Label("Bologna", systemImage: "mappin.circle.fill")
-            }
+                Label("Province", systemImage: "mappin.circle.fill")
+            }.accentColor(.white)
         }
     }
     

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CountryView: View {
     
+    let country: Country
+    
     @ObservedObject var viewModel = CountryViewModel()
     
     var body: some View {
@@ -20,15 +22,16 @@ struct CountryView: View {
         .onAppear() {
             self.loadData()
         }
+        .navigationTitle(country.name)
     }
     
     private func loadData() {
-        viewModel.loadData()
+        viewModel.loadData(country: country)
     }
 }
 
 struct CountryView_Previews: PreviewProvider {
     static var previews: some View {
-        CountryView()
+        CountryView(country: Country(code: "BO", name: "Bologna"))
     }
 }

@@ -20,8 +20,8 @@ class CountryViewModel: ObservableObject {
         self.weatherService = .init()
     }
     
-    func loadData() {
-        self.weatherService.getCountryDays()
+    func loadData(country: Country) {
+        self.weatherService.getCountryDays(country: country)
             .receive(on: RunLoop.main)
             .sink { value in
                 self.countryDays = value.sorted(by: { $0.day.compare($1.day) == .orderedAscending })

@@ -23,12 +23,12 @@ public class WeatherService {
                          .eraseToAnyPublisher()
     }
     
-    func getCountryDays() -> AnyPublisher<[CountryDay], Never> {
-        let weather1 = CountryDailyRequest.requestFuture(for: "1", country: "BO")
+    func getCountryDays(country: Country) -> AnyPublisher<[CountryDay], Never> {
+        let weather1 = CountryDailyRequest.requestFuture(for: "1", country: country.code)
                             .catch { _ in Empty<CountryDay, Never>() }
-        let weather2 = CountryDailyRequest.requestFuture(for: "2", country: "BO")
+        let weather2 = CountryDailyRequest.requestFuture(for: "2", country: country.code)
                             .catch { _ in Empty<CountryDay, Never>() }
-        let weather3 = CountryDailyRequest.requestFuture(for: "3", country: "BO")
+        let weather3 = CountryDailyRequest.requestFuture(for: "3", country: country.code)
                             .catch { _ in Empty<CountryDay, Never>() }
         
         return Publishers.MergeMany([weather1, weather2, weather3])

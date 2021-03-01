@@ -18,7 +18,12 @@ struct CountryDayView: View {
                 Spacer()
             }
             VStack (alignment: .leading, spacing: 5) {
-                Text(countryDay.forecast.HTMLStripped())
+                FakeHtmlView(countryDay.forecast)
+            }
+            VStack (alignment: .leading, spacing: 5) {
+                ForEach(countryDay.zones, id: \.self) { zone in
+                    Text(zone.name)
+                }
             }
             HStack {
                 Spacer()
@@ -34,7 +39,8 @@ struct CountryDayView_Previews: PreviewProvider {
         CountryDayView(countryDay: CountryDay(
             day: Date(),
             forecast: "<p>Sereno tutta la <b>giornata</b>.</p><p>Temperature massime pomeridiane comprese tra 14° sui rilievi e 19° in pianura.</p><p>Velocità massima del vento compresa tra 15 (sui rilievi) e 19 km/h (in pianura).</p>",
-            updatedAt: Date()
+            updatedAt: Date(),
+            zones: []
         ))
     }
 }

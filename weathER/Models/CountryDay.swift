@@ -13,6 +13,7 @@ struct CountryDay: Codable, Identifiable, Hashable {
     let day: Date
     let forecast: String
     let updatedAt: Date
+    let zones: [Zone]
     
     public var readableDay: String? {
         let dateFormatter = DateFormatter()
@@ -31,7 +32,7 @@ struct CountryDay: Codable, Identifiable, Hashable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case day, forecast
+        case day, forecast, zones
         case updatedAt = "updated_at"
     }
 }
