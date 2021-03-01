@@ -5,7 +5,7 @@
 
 import Foundation
 
-// MARK: - Forecast
-struct Forecast: Codable, Hashable {
+// MARK: - RegionalForecast
+struct RegionalForecast: Codable, Hashable {
     let weather, temperature, wind, sea: String
 }

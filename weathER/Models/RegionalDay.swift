@@ -9,7 +9,7 @@ import Foundation
 struct RegionalDay: Codable, Identifiable, Hashable {
     let id = UUID()
     let day: Date
-    let forecast: Forecast
+    let forecast: RegionalForecast
     let updatedAt: Date
     
     public var readableDay: String? {

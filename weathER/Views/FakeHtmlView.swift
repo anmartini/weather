@@ -19,7 +19,7 @@ struct FakeHtmlView: View {
     }
 
     private func formattedWithHTML(string: String) -> Text {
-        let data = Data("<XML>\(string.replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "</p>", with: "\n\n").replacingOccurrences(of: "<br />", with: "\n"))</XML>".utf8)
+        let data = Data("<XML>\(string.replacingOccurrences(of: "</p><p>", with: "\n\n").replacingOccurrences(of: "<br />", with: "\n"))</XML>".utf8)
         let parser = HTML2TextParser(data: data)
         parser.delegate = parser
         if parser.parse() {

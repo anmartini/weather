@@ -36,7 +36,7 @@ struct RegionalDayView_Previews: PreviewProvider {
     static var previews: some View {
         RegionalDayView(regionalDay: RegionalDay(
             day: Date(),
-            forecast: Forecast(
+            forecast: RegionalForecast(
                 weather: "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
                 temperature: "massime prossime a 20 gradi; valori tra 15 e 17 gradi lungo la costa.",
                 wind: "deboli e variabili con deboli brezze dal mare lungo la costa.",

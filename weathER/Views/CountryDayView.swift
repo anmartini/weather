@@ -20,16 +20,26 @@ struct CountryDayView: View {
             VStack (alignment: .leading, spacing: 5) {
                 FakeHtmlView(countryDay.forecast)
             }
-            VStack (alignment: .leading, spacing: 5) {
-                ForEach(countryDay.zones, id: \.self) { zone in
-                    Text(zone.name)
-                }
-            }
             HStack {
                 Spacer()
                 Text("Previsione del \(countryDay.readableUpdatedAt ?? "")")
                     .font(.footnote)
             }
+            Text("Zone")
+                .font(.title2)
+            List {
+                ForEach(countryDay.zones, id: \.self) { zone in
+                    Group {
+                        if zone.forecast != nil {
+                            NavigationLink(destination: ZoneView(zone: zone)) {
+                                Text(zone.name.capitalizedFirstLetter())
+                            }
+                        } else {
+                            Text(zone.name.capitalizedFirstLetter())
+                        }
+                    }
+                }
+            }.frame(height: CGFloat(45 * countryDay.zones.count))
         }
     }
 }

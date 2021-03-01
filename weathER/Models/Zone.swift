@@ -11,8 +11,10 @@ import Foundation
 struct Zone: Codable, Identifiable, Hashable {
     let id = UUID()
     let code, name: String
+    let forecast: ZoneForecast?
+    let times: [ZoneTime]
     
     enum CodingKeys: String, CodingKey {
-        case code, name
+        case code, name, forecast, times
     }
 }
