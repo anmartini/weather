@@ -8,7 +8,7 @@
 import Foundation
 
 struct ZoneForecast: Codable, Hashable {
-    let rain: Int?
+    let rain: String?
     let wind: Int
     let temperature: Temperature
 }

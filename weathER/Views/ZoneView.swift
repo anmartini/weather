@@ -30,7 +30,7 @@ struct ZoneView: View {
             HStack {
                 Text("Pioggia")
                 Spacer()
-                Text("\(zone.forecast!.rain ?? 0) mm")
+                Text("\(zone.forecast?.rain ?? "0") mm")
             }
         }
         .navigationTitle(zone.name.capitalizedFirstLetter())
