@@ -14,6 +14,7 @@
 		0F1211CF25EBD00A00E8A190 /* RegionalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1211CE25EBD00A00E8A190 /* RegionalViewModel.swift */; };
 		0F1211D425EBD94200E8A190 /* RegionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1211D325EBD94200E8A190 /* RegionalView.swift */; };
 		0F1211D925EBDB0300E8A190 /* UINavigationController+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1211D825EBDB0300E8A190 /* UINavigationController+Colors.swift */; };
+		0F2EFADB2611A36300B10D30 /* weather in Frameworks */ = {isa = PBXBuildFile; productRef = 0F2EFADA2611A36300B10D30 /* weather */; };
 		6551BC5225E8018100FC4468 /* weathERApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BC5125E8018100FC4468 /* weathERApp.swift */; };
 		6551BC5425E8018100FC4468 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BC5325E8018100FC4468 /* ContentView.swift */; };
 		6551BC5625E8018200FC4468 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6551BC5525E8018200FC4468 /* Assets.xcassets */; };
@@ -117,6 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6584A89325E8083700F03261 /* Alamofire in Frameworks */,
+				0F2EFADB2611A36300B10D30 /* weather in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +245,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0F2EFAD92611A36300B10D30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6551BC4525E8018100FC4468 = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +259,7 @@
 				6551BC6225E8018300FC4468 /* weathERTests */,
 				6551BC6D25E8018300FC4468 /* weathERUITests */,
 				6551BC4F25E8018100FC4468 /* Products */,
+				0F2EFAD92611A36300B10D30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -324,6 +334,7 @@
 			name = weathER;
 			packageProductDependencies = (
 				6584A89225E8083700F03261 /* Alamofire */,
+				0F2EFADA2611A36300B10D30 /* weather */,
 			);
 			productName = weathER;
 			productReference = 6551BC4E25E8018100FC4468 /* weathER.app */;
@@ -819,6 +830,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0F2EFADA2611A36300B10D30 /* weather */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = weather;
+		};
 		6584A89225E8083700F03261 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6584A89125E8083700F03261 /* XCRemoteSwiftPackageReference "Alamofire" */;
