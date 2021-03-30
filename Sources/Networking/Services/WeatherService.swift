@@ -10,9 +10,9 @@ import Foundation
 import SharedModels
 
 public class WeatherService {
-
+    
     public init() {}
-
+    
     public func getRegionalDays() -> AnyPublisher<[RegionalDay], Never> {
         let days = ["1", "2", "3"]
         let publishers: [AnyPublisher<RegionalDay, Never>] = days.map {
@@ -20,17 +20,17 @@ public class WeatherService {
                 .request(for: $0)
                 .compactMap { result in
                     switch result {
-                        case .success(let value):
-                            return value
-                        case .failure(_):
-                            return nil
+                    case .success(let value):
+                        return value
+                    case .failure(_):
+                        return nil
                     }
                 }
                 .eraseToAnyPublisher()
         }
         return Publishers.MergeMany(publishers)
-                         .collect()
-                         .eraseToAnyPublisher()
+            .collect()
+            .eraseToAnyPublisher()
     }
     
     public func getCountryDays(country: Country) -> AnyPublisher<[CountryDay], Never> {
@@ -40,16 +40,16 @@ public class WeatherService {
                 .request(for: $0, country: country.code)
                 .compactMap { result in
                     switch result {
-                        case .success(let value):
-                            return value
-                        case .failure(_):
-                            return nil
+                    case .success(let value):
+                        return value
+                    case .failure(_):
+                        return nil
                     }
                 }
                 .eraseToAnyPublisher()
         }
         return Publishers.MergeMany(publishers)
-                         .collect()
-                         .eraseToAnyPublisher()
+            .collect()
+            .eraseToAnyPublisher()
     }
 }
