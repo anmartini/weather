@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SharedModels
 
 struct ZoneView: View {
     let zone: Zone
@@ -45,7 +46,7 @@ struct ZoneView_Previews: PreviewProvider {
                     forecast: ZoneForecast(
                         rain: nil,
                         wind: 18,
-                        temperature: Temperature(max: 14, min: 1)
+                        temperature: Temperature(min: 1, max: 14)
                     ),
                     times: []
             ))

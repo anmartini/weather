@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct WeatherText: Codable, Hashable {
-    let it, en: String
+public struct WeatherText: Codable, Hashable {
+    public let it: String
+    public let en: String
 }

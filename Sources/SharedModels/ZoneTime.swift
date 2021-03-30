@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ZoneTime: Codable, Identifiable, Hashable {
-    let id = UUID()
-    let weather: Weather
+public struct ZoneTime: Codable, Identifiable, Hashable {
+    public let id = UUID()
+    public let weather: Weather
     
     enum CodingKeys: String, CodingKey {
         case weather

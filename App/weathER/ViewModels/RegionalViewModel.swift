@@ -7,6 +7,8 @@
 
 import Combine
 import Foundation
+import Networking
+import SharedModels
 
 class RegionalViewModel: ObservableObject {
     

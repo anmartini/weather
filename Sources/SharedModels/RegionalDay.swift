@@ -6,11 +6,11 @@
 import Foundation
 
 // MARK: - RegionalDay
-struct RegionalDay: Codable, Identifiable, Hashable {
-    let id = UUID()
-    let day: Date
-    let forecast: RegionalForecast
-    let updatedAt: Date
+public struct RegionalDay: Codable, Identifiable, Hashable {
+    public let id = UUID()
+    public let day: Date
+    public let forecast: RegionalForecast
+    public let updatedAt: Date
     
     public var readableDay: String? {
         let dateFormatter = DateFormatter()
@@ -31,5 +31,13 @@ struct RegionalDay: Codable, Identifiable, Hashable {
     enum CodingKeys: String, CodingKey {
         case day, forecast
         case updatedAt = "updated_at"
+    }
+
+    public init(day: Date,
+                forecast: RegionalForecast,
+                updatedAt: Date) {
+        self.day = day
+        self.forecast = forecast
+        self.updatedAt = updatedAt
     }
 }

@@ -7,21 +7,23 @@
 
 import Combine
 import Foundation
+import Networking
+import SharedModels
 
 class CountriesViewModel: ObservableObject {
     
-    private let utilsService: UtilsService
+    private let countriesService: CountriesService
     private var cancellables = Set<AnyCancellable>()
     
     @Published public var countries = [Country]()
     
     
     init() {
-        self.utilsService = .init()
+        self.countriesService = .init()
     }
     
     func loadData() {
-        self.utilsService.getCountries()
+        self.countriesService.getCountries()
             .receive(on: RunLoop.main)
             .sink { value in
                 self.countries = value

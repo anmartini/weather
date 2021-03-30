@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SharedModels
 
 struct CountryDayView: View {
     let countryDay: CountryDay

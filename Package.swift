@@ -5,24 +5,45 @@ import PackageDescription
 
 let package = Package(
     name: "weather",
+    platforms: [
+      .macOS(.v11),
+      .iOS(.v14),
+    ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "weather",
-            targets: ["weather"]),
+        .library(name: "AppFeature", targets: ["AppFeature"]),
+        .library(name: "Networking", targets: ["Networking"]),
+        .library(name: "SharedModels", targets: ["SharedModels"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(
+            url: "https://github.com/pointfreeco/swift-composable-architecture.git",
+            .upToNextMajor(from: "0.17.0")
+        ),
+        .package(
+            url: "https://github.com/Alamofire/Alamofire.git",
+            .upToNextMajor(from: "5.4.1")
+        )
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "weather",
-            dependencies: []),
-        .testTarget(
-            name: "weatherTests",
-            dependencies: ["weather"]),
+            name: "AppFeature",
+            dependencies: [
+                "SharedModels",
+                "Networking",
+                .product(name: "ComposableArchitecture",
+                         package: "swift-composable-architecture"),
+            ]
+        ),
+        .target(
+            name: "SharedModels",
+            dependencies: []
+        ),
+        .target(
+            name: "Networking",
+            dependencies: [
+                "Alamofire",
+                "SharedModels"
+            ]
+        ),
     ]
 )

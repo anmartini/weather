@@ -8,12 +8,13 @@
 import Foundation
 
 // MARK: - CountryDay
-struct CountryDay: Codable, Identifiable, Hashable {
-    let id = UUID()
-    let day: Date
-    let forecast: String
-    let updatedAt: Date
-    let zones: [Zone]
+public struct CountryDay: Codable, Identifiable, Hashable {
+
+    public let id = UUID()
+    public let day: Date
+    public let forecast: String
+    public let updatedAt: Date
+    public let zones: [Zone]
     
     public var readableDay: String? {
         let dateFormatter = DateFormatter()
@@ -34,5 +35,15 @@ struct CountryDay: Codable, Identifiable, Hashable {
     enum CodingKeys: String, CodingKey {
         case day, forecast, zones
         case updatedAt = "updated_at"
+    }
+
+    public init(day: Date,
+                forecast: String,
+                updatedAt: Date,
+                zones: [Zone]) {
+        self.day = day
+        self.forecast = forecast
+        self.updatedAt = updatedAt
+        self.zones = zones
     }
 }
