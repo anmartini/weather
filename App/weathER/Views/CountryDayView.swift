@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SharedUtils
 import SharedModels
 
 struct CountryDayView: View {
@@ -14,8 +15,8 @@ struct CountryDayView: View {
     var body: some View {
         VStack (alignment: .leading, spacing: 10) {
             HStack {
-                Text((countryDay.readableDay ?? "giorno").capitalizedFirstLetter())
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                Text((countryDay.readableDay ?? "giorno").capitalizedFirstLetter)
+                    .font(.title)
                 Spacer()
             }
             VStack (alignment: .leading, spacing: 5) {
@@ -33,10 +34,10 @@ struct CountryDayView: View {
                     Group {
                         if zone.forecast != nil {
                             NavigationLink(destination: ZoneView(zone: zone)) {
-                                Text(zone.name.capitalizedFirstLetter())
+                                Text(zone.name.capitalizedFirstLetter)
                             }
                         } else {
-                            Text(zone.name.capitalizedFirstLetter())
+                            Text(zone.name.capitalizedFirstLetter)
                         }
                     }
                 }

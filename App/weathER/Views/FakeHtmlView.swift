@@ -44,7 +44,7 @@ private class HTML2TextParser: XMLParser, XMLParserDelegate {
             return
         }
         
-        var textChunk = Text(firstChunk ? contentText.capitalizedFirstLetter() : contentText)
+        var textChunk = Text(firstChunk ? contentText.capitalizedFirstLetter : contentText)
         textChunk = isBold ? textChunk.bold() : textChunk
         textChunk = isItalic ? textChunk.italic() : textChunk
         resultText = resultText + textChunk

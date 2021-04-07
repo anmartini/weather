@@ -7,23 +7,24 @@
 
 import Combine
 import Foundation
-import Networking
 import SharedModels
+import ApiClientLive
 
 class RegionalViewModel: ObservableObject {
-    
-    private let weatherService: WeatherService
+
     private var cancellables = Set<AnyCancellable>()
     
     @Published public var regionalDays = [RegionalDay]()
+
+    let client = ApiClient.live()
     
     
     init() {
-        self.weatherService = .init()
     }
     
     func loadData() {
-        self.weatherService.getRegionalDays()
+        self.client.regionalDays(["1", "2", "3"])
+            .replaceError(with: [])
             .receive(on: RunLoop.main)
             .sink { value in
                 self.regionalDays = value.sorted(by: { $0.day.compare($1.day) == .orderedAscending })

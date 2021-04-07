@@ -7,23 +7,23 @@
 
 import Combine
 import Foundation
-import Networking
 import SharedModels
+import ApiClientLive
 
 class CountriesViewModel: ObservableObject {
-    
-    private let countriesService: CountriesService
+
     private var cancellables = Set<AnyCancellable>()
     
     @Published public var countries = [Country]()
-    
+
+    let client = ApiClient.live()
     
     init() {
-        self.countriesService = .init()
     }
     
     func loadData() {
-        self.countriesService.getCountries()
+        self.client.countries()
+            .replaceError(with: [])
             .receive(on: RunLoop.main)
             .sink { value in
                 self.countries = value

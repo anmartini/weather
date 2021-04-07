@@ -34,7 +34,7 @@ struct ZoneView: View {
                 Text("\(zone.forecast?.rain ?? "0") mm")
             }
         }
-        .navigationTitle(zone.name.capitalizedFirstLetter())
+        .navigationTitle(zone.name.capitalizedFirstLetter)
     }
 }
 

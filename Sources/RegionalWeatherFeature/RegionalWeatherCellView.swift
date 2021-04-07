@@ -1,22 +1,24 @@
 //
-//  RegionalDayView.swift
-//  weathER
+//  RegionalWeatherCellView.swift
+//  
 //
-//  Created by Andrea Martini on 25/02/21.
+//  Created by Roberto Casula on 03/04/21.
 //
 
 import SwiftUI
 import SharedUtils
 import SharedModels
+import ComposableArchitecture
 
-struct RegionalDayView: View {
+struct RegionalWeatherCellView: View {
+
     let regionalDay: RegionalDay
-    
+
     var body: some View {
         VStack (alignment: .leading, spacing: 10) {
             HStack {
                 Text((regionalDay.readableDay ?? "giorno").capitalizedFirstLetter)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.title)
                 Spacer()
             }
             VStack (alignment: .leading, spacing: 5) {
@@ -34,9 +36,9 @@ struct RegionalDayView: View {
     }
 }
 
-struct RegionalDayView_Previews: PreviewProvider {
+struct RegionalWeatherCellView_Previews: PreviewProvider {
     static var previews: some View {
-        RegionalDayView(regionalDay: RegionalDay(
+        RegionalWeatherCellView(regionalDay: RegionalDay(
             day: Date(),
             forecast: RegionalForecast(
                 weather: "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
