@@ -7,6 +7,7 @@
 
 import Foundation
 import SharedModels
+import CountryFeature
 
 public struct CountriesState: Equatable {
 
@@ -14,14 +15,18 @@ public struct CountriesState: Equatable {
     var isCountriesRequestInFlight: Bool
     var countriesRequestError: ApiError?
 
+    var selection: CountryState?
+
     public init(
         countries: [Country],
         isCountriesRequestInFlight: Bool,
-        countriesRequestError: ApiError? = nil
+        countriesRequestError: ApiError? = nil,
+        selection: CountryState? = nil
     ) {
         self.countries = countries
         self.isCountriesRequestInFlight = isCountriesRequestInFlight
         self.countriesRequestError = countriesRequestError
+        self.selection = selection
     }
 }
 
@@ -31,7 +36,8 @@ extension CountriesState {
         .init(
             countries: [],
             isCountriesRequestInFlight: false,
-            countriesRequestError: nil
+            countriesRequestError: nil,
+            selection: nil
         )
     }
 }

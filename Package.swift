@@ -14,6 +14,7 @@ let package = Package(
         .library(name: "RegionalWeatherFeature",
                  targets: ["RegionalWeatherFeature"]),
         .library(name: "CountriesFeature", targets: ["CountriesFeature"]),
+        .library(name: "CountryFeature", targets: ["CountryFeature"]),
         .library(name: "ApiClient", targets: ["ApiClient"]),
         .library(name: "ApiClientLive", targets: ["ApiClientLive"]),
         .library(name: "SharedModels", targets: ["SharedModels"]),
@@ -54,6 +55,17 @@ let package = Package(
         ),
         .target(
             name: "CountriesFeature",
+            dependencies: [
+                "ApiClient",
+                "SharedUtils",
+                "SharedModels",
+                "CountryFeature",
+                .product(name: "ComposableArchitecture",
+                         package: "swift-composable-architecture"),
+            ]
+        ),
+        .target(
+            name: "CountryFeature",
             dependencies: [
                 "ApiClient",
                 "SharedUtils",
