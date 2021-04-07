@@ -9,9 +9,9 @@ import Foundation
 import ComposableArchitecture
 
 public let regionalWeatherFeatureReducer = Reducer<
-    RegionalWeatherFeatureState,
-    RegionalWeatherFeatureAction,
-    RegionalWeatherFeatureEnvironment
+    RegionalWeatherState,
+    RegionalWeatherAction,
+    RegionalWeatherEnvironment
 > { state, action, environment in
     switch action {
     case .onAppear:
@@ -24,7 +24,7 @@ public let regionalWeatherFeatureReducer = Reducer<
         state.regionalDaysRequestError = nil
         return environment.regionalDays(days)
             .catchToEffect()
-            .map(RegionalWeatherFeatureAction.regionalDaysResponse)
+            .map(RegionalWeatherAction.regionalDaysResponse)
             .delay(for: 1, scheduler: environment.mainQueue.eraseToAnyScheduler())
             .eraseToEffect()
     case .regionalDaysResponse(.success(let days)):

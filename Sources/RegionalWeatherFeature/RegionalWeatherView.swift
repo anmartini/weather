@@ -11,7 +11,7 @@ import ComposableArchitecture
 
 public struct RegionalWeatherView: View {
 
-    let store: Store<RegionalWeatherFeatureState, RegionalWeatherFeatureAction>
+    let store: Store<RegionalWeatherState, RegionalWeatherAction>
 
     public var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -34,8 +34,8 @@ public struct RegionalWeatherView: View {
     }
 
     public init(
-        store: Store<RegionalWeatherFeatureState,
-                     RegionalWeatherFeatureAction>
+        store: Store<RegionalWeatherState,
+                     RegionalWeatherAction>
     ) {
         self.store = store
     }

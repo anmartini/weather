@@ -1,5 +1,5 @@
 //
-//  RegionalWeatherFeatureState.swift
+//  RegionalWeatherState.swift
 //  
 //
 //  Created by Roberto Casula on 03/04/21.
@@ -8,7 +8,7 @@
 import Foundation
 import SharedModels
 
-public struct RegionalWeatherFeatureState: Equatable {
+public struct RegionalWeatherState: Equatable {
     var isRegionalDaysRequestInFlight: Bool
     var days: [RegionalDay]
     var regionalDaysRequestError: ApiError?
@@ -24,7 +24,7 @@ public struct RegionalWeatherFeatureState: Equatable {
     }
 }
 
-extension RegionalWeatherFeatureState {
+extension RegionalWeatherState {
 
     public static var initialState: Self {
         .init(
