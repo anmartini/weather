@@ -21,4 +21,9 @@ public struct CountryEnvironment {
         self.countryDays = countryDays
         self.mainQueue = mainQueue
     }
+
+    public static let noop = Self(
+        countryDays: { _,_ in .none },
+        mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+    )
 }

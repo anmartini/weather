@@ -22,4 +22,9 @@ public struct RegionalWeatherEnvironment {
         self.regionalDays = regionalDays
         self.mainQueue = mainQueue
     }
+
+    public static let noop = Self(
+        regionalDays: { _ in .none },
+        mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+    )
 }

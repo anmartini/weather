@@ -24,7 +24,7 @@ public struct ApiClient {
     public var regionalDays:
         ([String]) -> Effect<[RegionalDay], ApiError>
     public var countryDays:
-        ([String], Country) -> Effect<[CountryDay], ApiError>
+        (Country, [String]) -> Effect<[CountryDay], ApiError>
 
     public init(
         baseUrl: @escaping () -> URL,
@@ -37,7 +37,7 @@ public struct ApiClient {
         >,
         countries: @escaping () -> Effect<[Country], ApiError>,
         regionalDays: @escaping ([String]) -> Effect<[RegionalDay], ApiError>,
-        countryDays: @escaping ([String], Country) -> Effect<[CountryDay], ApiError>
+        countryDays: @escaping (Country, [String]) -> Effect<[CountryDay], ApiError>
     ) {
         self.baseUrl = baseUrl
         self.jsonDecoder = jsonDecoder

@@ -24,7 +24,10 @@ public struct CountryView: View {
             }
             .navigationTitle(viewStore.country.name)
             .overlay(
-                viewStore.isCountryDaysRequestInFlight ? ProgressView() : nil
+                viewStore.isCountryDaysRequestInFlight ?
+                    ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .green))
+                    : nil
             )
             .onAppear() {
                 viewStore.send(.onAppear)
@@ -61,9 +64,7 @@ struct CountryView_Previews: PreviewProvider {
                     isCountryDaysRequestInFlight: false
                 ),
                 reducer: countryReducer,
-                environment: .init(
-                    countryDays: { _, _ in .none }
-                )
+                environment: .noop
             )
         )
     }

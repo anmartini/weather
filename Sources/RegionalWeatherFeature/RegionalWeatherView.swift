@@ -15,20 +15,20 @@ public struct RegionalWeatherView: View {
 
     public var body: some View {
         WithViewStore(self.store) { viewStore in
-            if viewStore.isRegionalDaysRequestInFlight {
-                ProgressView()
+            List {
+                ForEach(viewStore.days) { regionalDay in
+                    RegionalWeatherCellView(regionalDay: regionalDay)
+                }
+            }
+            .overlay(
+                viewStore.isRegionalDaysRequestInFlight ?
+                    ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .green))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .transition(AnyTransition.opacity.animation(Animation.default.delay(1.5)))
-            } else {
-                List {
-                    ForEach(viewStore.days) { regionalDay in
-                        RegionalWeatherCellView(regionalDay: regionalDay)
-                    }
-                }
-                .onAppear {
-                    viewStore.send(.onAppear)
-                }
+//                    .transition(AnyTransition.opacity.animation(Animation.default.delay(1.5)))
+                    : nil
+            )
+            .onAppear {
+                viewStore.send(.onAppear)
             }
         }
     }
@@ -72,15 +72,8 @@ struct RegionalWeatherView_Previews: PreviewProvider {
                     regionalDaysRequestError: nil
                 ),
                 reducer: regionalWeatherFeatureReducer,
-                environment: .init(
-                    regionalDays: loadRegionalDays(days:),
-                    mainQueue: DispatchQueue.main.eraseToAnyScheduler()
-                )
+                environment: .noop
             )
         )
-    }
-
-    static func loadRegionalDays(days: [String]) -> Effect<[RegionalDay], ApiError> {
-        return .none
     }
 }

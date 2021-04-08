@@ -37,8 +37,9 @@ let package = Package(
             name: "AppFeature",
             dependencies: [
                 "ApiClient",
-//                "SharedUtils",
                 "SharedModels",
+                "CountriesFeature",
+                "RegionalWeatherFeature",
                 .product(name: "ComposableArchitecture",
                          package: "swift-composable-architecture"),
             ]

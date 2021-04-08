@@ -62,7 +62,7 @@ extension ApiClient {
                     .collect()
                     .eraseToEffect()
             },
-            countryDays: { days, country in
+            countryDays: { country, days in
                 let requests = days.map {
                     ApiClientLive.apiRequest(
                         baseUrl: baseUrl,

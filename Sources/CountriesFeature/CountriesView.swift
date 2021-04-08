@@ -39,7 +39,9 @@ public struct CountriesView: View {
             }
             .overlay(
                 viewStore.isCountriesRequestInFlight ?
-                    ProgressView() : nil
+                    ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .green))
+                    : nil
             )
             .onAppear() {
                 viewStore.send(.onAppear)
@@ -78,10 +80,7 @@ struct CountriesView_Previews: PreviewProvider {
                     isCountriesRequestInFlight: false
                 ),
                 reducer: countriesReducer,
-                environment: .init(
-                    countries: { .none },
-                    countryDays: { _, _ in .none }
-                )
+                environment: .noop
             )
         )
     }
