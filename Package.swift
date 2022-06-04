@@ -1,13 +1,15 @@
-// swift-tools-version:5.3
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version:5.5
 
 import PackageDescription
 
 let package = Package(
     name: "weather",
+    defaultLocalization: "en",
     platforms: [
+        .iOS(.v15),
+        .watchOS(.v7),
+        .tvOS(.v15),
         .macOS(.v11),
-        .iOS(.v14),
     ],
     products: [
         .library(name: "AppFeature", targets: ["AppFeature"]),
