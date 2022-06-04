@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>accessibility_avvisi_leggere</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@elements@</string>
+            <key>elements</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>one to read.</string>
+                <key>other</key>
+                <string>%d to read.</string>
+                <key>zero</key>
+                <string>none to read</string>
+            </dict>
+        </dict>
+        <key>accessibility_avvisi_presenza</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@elements@</string>
+            <key>elements</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>there is a notice</string>
+                <key>other</key>
+                <string>there are %d notices</string>
+                <key>zero</key>
+                <string>there are no notices</string>
+            </dict>
+        </dict>
+        <key>accessibility_avvisoRelativoA</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@elements@</string>
+            <key>elements</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>notice valid for no routes</string>
+                <key>other</key>
+                <string>notice valid for routes</string>
+                <key>zero</key>
+                <string>notice valid for route</string>
+            </dict>
+        </dict>
+        <key>accessibility_route_notices</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@elements@</string>
+            <key>elements</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>There is a notice for this route.</string>
+                <key>other</key>
+                <string>There are %d notices for this route.</string>
+                <key>zero</key>
+                <string>There are %d notices for this route.</string>
+            </dict>
+        </dict>
+        <key>planner_numberOfBusStops</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@elements@</string>
+            <key>elements</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>One stop</string>
+                <key>other</key>
+                <string>%d stops</string>
+                <key>zero</key>
+                <string>No stops</string>
+            </dict>
+        </dict>
+        <key>realtime_train_delay_minutes</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@elements@</string>
+            <key>elements</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>delay: %d minute</string>
+                <key>other</key>
+                <string>delay: %d minutes</string>
+                <key>zero</key>
+                <string>delay: %d minutes</string>
+            </dict>
+        </dict>
+        <key>webus_pluralStation</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@elements@</string>
+            <key>elements</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>station</string>
+                <key>other</key>
+                <string>stations</string>
+                <key>zero</key>
+                <string>stations</string>
+            </dict>
+        </dict>
+        <key>webus_pluralStop</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@elements@</string>
+            <key>elements</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>stop</string>
+                <key>other</key>
+                <string>stops</string>
+                <key>zero</key>
+                <string>stops</string>
+            </dict>
+        </dict>
+    </dict>
+</plist>
