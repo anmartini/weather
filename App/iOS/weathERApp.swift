@@ -29,7 +29,7 @@ struct weathERApp: App {
 extension AppEnvironment {
     static var live: Self {
         .init(
-            apiClient: ApiClient.live(),
+            apiClient: .live(),
             mainQueue: DispatchQueue.main.eraseToAnyScheduler()
         )
     }
