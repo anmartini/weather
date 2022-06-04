@@ -37,7 +37,6 @@
 		6551BC4E25E8018100FC4468 /* weathER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weathER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6551BC5125E8018100FC4468 /* weathERApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weathERApp.swift; sourceTree = "<group>"; };
 		6551BC5525E8018200FC4468 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6551BC5A25E8018200FC4468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		656B87BC25E83D5C002E04B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		656B87C125E83D60002E04B4 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,31 +72,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F1211A025EBB7E200E8A190 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				6551BC5125E8018100FC4468 /* weathERApp.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		0F1211A125EBB7E700E8A190 /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-				6551BC5A25E8018200FC4468 /* Info.plist */,
-			);
-			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		0F1211A225EBB7F200E8A190 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6551BC5525E8018200FC4468 /* Assets.xcassets */,
-				656B87BD25E83D5C002E04B4 /* Localizable.strings */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		0F1211DD25EBDB1A00E8A190 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,7 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				0F45F0EF284B33CD002B45F1 /* weather */,
-				6551BC5025E8018100FC4468 /* weathER */,
+				6551BC5025E8018100FC4468 /* iOS */,
+				0F7A77B7261A18A7005EA35A /* Previews */,
 				6551BC4F25E8018100FC4468 /* Products */,
 				0F2EFAD92611A36300B10D30 /* Frameworks */,
 			);
@@ -162,16 +137,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6551BC5025E8018100FC4468 /* weathER */ = {
+		6551BC5025E8018100FC4468 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				0F1211DD25EBDB1A00E8A190 /* Extensions */,
-				0F1211A025EBB7E200E8A190 /* App */,
-				0F1211A225EBB7F200E8A190 /* Resources */,
-				0F1211A125EBB7E700E8A190 /* SupportingFiles */,
-				0F7A77B7261A18A7005EA35A /* Previews */,
+				6551BC5125E8018100FC4468 /* weathERApp.swift */,
+				6551BC5525E8018200FC4468 /* Assets.xcassets */,
+				656B87BD25E83D5C002E04B4 /* Localizable.strings */,
 			);
-			path = weathER;
+			path = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,7 +221,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					0F7A77BB261A1995005EA35A = {
 						CreatedOnToolsVersion = 12.4;
@@ -437,6 +411,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -484,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -498,6 +473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -539,7 +515,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -555,14 +531,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DJ6W8RXUX6;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = weathER/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = it.anmartini.weathER;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -576,14 +554,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DJ6W8RXUX6;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = weathER/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = it.anmartini.weathER;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
