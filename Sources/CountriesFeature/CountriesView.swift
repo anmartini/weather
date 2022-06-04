@@ -18,23 +18,23 @@ public struct CountriesView: View {
         WithViewStore(self.store) { viewStore in
             List {
                 ForEach(viewStore.countries) { country in
-                    NavigationLink(
-                        destination: IfLetStore(
-                            self.store.scope(
-                                state: { $0.selection },
-                                action: CountriesAction.country
-                            ),
-                            then: CountryView.init(store:),
-                            else: ProgressView()
-                        ),
-                        tag: country,
-                        selection: viewStore.binding(
-                            get: { $0.selection?.country },
-                            send: CountriesAction.setNavigation(selection:)
-                        )
-                    ) {
-                        Text(country.name)
-                    }
+//                    NavigationLink(
+//                        destination: IfLetStore(
+//                            self.store.scope(
+//                                state: { $0.selection },
+//                                action: CountriesAction.country
+//                            ),
+//                            then: CountryView.init(store:),
+//                            else: ProgressView()
+//                        ),
+//                        tag: country,
+//                        selection: viewStore.binding(
+//                            get: { $0.selection?.country },
+//                            send: CountriesAction.setNavigation(selection:)
+//                        )
+//                    ) {
+//                        Text(country.name)
+//                    }
                 }
             }
             .overlay(

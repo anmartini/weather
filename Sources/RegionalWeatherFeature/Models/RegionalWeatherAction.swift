@@ -7,9 +7,10 @@
 
 import Foundation
 import SharedModels
+import ComposableArchitecture
 
 public enum RegionalWeatherAction: Equatable {
     case onAppear
     case loadWeather(days: [String])
-    case regionalDaysResponse(Result<[RegionalDay], ApiError>)
+    case regionalDaysResponse(TaskResult<[RegionalDay]>)
 }

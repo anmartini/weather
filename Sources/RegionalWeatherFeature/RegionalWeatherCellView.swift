@@ -5,6 +5,9 @@
 //  Created by Roberto Casula on 03/04/21.
 //
 
+import SwiftUI
+import SharedModels
+import SharedExtensions
 import ComposableArchitecture
 import SharedModels
 import SharedUtils

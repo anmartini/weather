@@ -5,9 +5,9 @@
 //  Created by Roberto Casula on 07/04/21.
 //
 
-import SharedModels
-import SharedUtils
 import SwiftUI
+import SharedModels
+import SharedExtensions
 
 struct CountryDayView: View {
 
