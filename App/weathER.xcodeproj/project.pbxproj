@@ -45,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		0F1211D825EBDB0300E8A190 /* UINavigationController+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Colors.swift"; sourceTree = "<group>"; };
+		0F45F0EF284B33CD002B45F1 /* weather */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = weather; path = ..; sourceTree = "<group>"; };
 		0F7A77BC261A1995005EA35A /* RegionalWeatherPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegionalWeatherPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F7A77BE261A1995005EA35A /* RegionalWeatherPreviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionalWeatherPreviewApp.swift; sourceTree = "<group>"; };
 		0F7A77C2261A1998005EA35A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -185,6 +186,7 @@
 		6551BC4525E8018100FC4468 = {
 			isa = PBXGroup;
 			children = (
+				0F45F0EF284B33CD002B45F1 /* weather */,
 				6551BC5025E8018100FC4468 /* weathER */,
 				6551BC6225E8018300FC4468 /* weathERTests */,
 				6551BC6D25E8018300FC4468 /* weathERUITests */,
