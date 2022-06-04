@@ -1,86 +1,84 @@
 //
 //  Live.swift
-//
+//  
 //
 //  Created by Roberto Casula on 03/04/21.
 //
 
-@_exported import ApiClient
-import Combine
-import ComposableArchitecture
+import ApiClient
 import Foundation
-import Router
-import Routes
+import ServerRouter
 import SharedModels
+import URLRouting
 
 extension ApiClient {
 
     public static func live(
         baseUrl defaultBaseUrl: URL = URL(string: "https://meteo.kyntos.it")!
     ) -> Self {
-        let baseUrl = defaultBaseUrl
-        let router = Router<Route>.shared
-        let decoder = ApiClientLive.jsonDecoder
+        var baseUrl: URL = defaultBaseUrl
+
+        let router = ServerRouter(
+            date: Date.init,
+            decoder: decoder,
+            encoder: encoder
+        )
+
         return Self(
-            baseUrl: { baseUrl },
-            jsonDecoder: { decoder },
             request: { route in
-                return ApiClientLive.request(
+                try await ApiClientLive.request(
                     baseUrl: baseUrl,
                     route: route,
                     router: router
                 )
             },
             apiRequest: { route in
-                return ApiClientLive.apiRequest(
+                try await ApiClientLive.apiRequest(
                     baseUrl: baseUrl,
                     route: route,
                     router: router
                 )
             },
-            countries: {
-                return ApiClientLive.apiRequest(
-                    baseUrl: baseUrl,
-                    route: .countries,
-                    router: router
-                )
-                .map(\.data)
-                .apiDecode(as: [Country].self, decoder: decoder)
-                .eraseToEffect()
-            },
-            regionalDays: { days in
-                let requests = days.map {
-                    ApiClientLive.apiRequest(
-                        baseUrl: baseUrl,
-                        route: .regionalDay(day: $0),
-                        router: router
-                    )
-                    .map(\.data)
-                    .apiDecode(as: RegionalDay.self, decoder: decoder)
-                }
-                return Publishers.MergeMany(requests)
-                    .collect()
-                    .eraseToEffect()
-            },
-            countryDays: { country, days in
-                let requests = days.map {
-                    ApiClientLive.apiRequest(
-                        baseUrl: baseUrl,
-                        route: .countryDay(day: $0, country: country),
-                        router: router
-                    )
-                    .map(\.data)
-                    .apiDecode(as: CountryDay.self, decoder: decoder)
-                }
-                return Publishers.MergeMany(requests)
-                    .collect()
-                    .eraseToEffect()
+            baseUrl: { baseUrl },
+            setBaseUrl: { @MainActor url in
+                baseUrl = url
             }
         )
     }
 }
 
-private let jsonDecoder = { () -> JSONDecoder in
+private func request(
+    baseUrl: URL,
+    route: ServerRoute,
+    router: ServerRouter
+) async throws -> (value: Data, response: URLResponse) {
+    let client = URLRoutingClient.live(
+        router: router.baseURL(baseUrl.absoluteString)
+    )
+    return try await client.data(for: route)
+}
+
+private func apiRequest(
+    baseUrl: URL,
+    route: ServerRoute.Api.Route,
+    router: ServerRouter
+) async throws -> (value: Data, response: URLResponse) {
+    return try await request(
+        baseUrl: baseUrl,
+        route: .api(
+            .init(route: route)
+        ),
+        router: router
+    )
+}
+
+private let encoder = { () -> JSONEncoder in
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .iso8601
+    return encoder
+}()
+
+private let decoder = { () -> JSONDecoder in
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
     return decoder

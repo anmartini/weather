@@ -18,8 +18,7 @@ let package = Package(
         .library(name: "CountryFeature", targets: ["CountryFeature"]),
         .library(name: "ApiClient", targets: ["ApiClient"]),
         .library(name: "ApiClientLive", targets: ["ApiClientLive"]),
-        .library(name: "Router", targets: ["Router"]),
-        .library(name: "Routes", targets: ["Routes"]),
+        .library(name: "ServerRouter", targets: ["ServerRouter"]),
         .library(name: "Resources", targets: ["Resources"]),
         .library(name: "SharedExtensions", targets: ["SharedExtensions"]),
         .library(name: "SharedModels", targets: ["SharedModels"]),
@@ -27,17 +26,14 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture.git",
-            .upToNextMajor(from: "0.36.0")
+            branch: "concurrency-updates"
+//            .upToNextMajor(from: "0.36.0")
         ),
         .package(url: "http://github.com/pointfreeco/swift-url-routing", from: "0.2.0"),
         .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.9.2"),
         .package(
             url: "https://github.com/pointfreeco/xctest-dynamic-overlay",
             from: "0.2.1"
-        ),
-        .package(
-            url: "https://github.com/Alamofire/Alamofire.git",
-            .upToNextMajor(from: "5.4.1")
         )
     ],
     targets: [
@@ -86,40 +82,28 @@ let package = Package(
         .target(
             name: "ApiClient",
             dependencies: [
-                "Routes",
-                "Alamofire",
                 "SharedModels",
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture"
-                ),
             ]
         ),
         .target(
             name: "ApiClientLive",
             dependencies: [
-                "Router",
-                "Routes",
                 "ApiClient",
+                "ServerRouter",
                 "SharedModels",
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture"
-                ),
+//                .product(
+//                    name: "ComposableArchitecture",
+//                    package: "swift-composable-architecture"
+//                ),
             ]
         ),
         .target(
-            name: "Routes",
+            name: "ServerRouter",
             dependencies: [
-                "SharedModels"
-            ]
-        ),
-        .target(
-            name: "Router",
-            dependencies: [
-                "Routes",
-                "Alamofire",
-                "SharedModels"
+                "SharedModels",
+                .product(name: "Parsing", package: "swift-parsing"),
+                .product(name: "URLRouting", package: "swift-url-routing"),
+                .product(name: "XCTestDynamicOverlay", package: "xctest-dynamic-overlay"),
             ]
         ),
         .target(
