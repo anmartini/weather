@@ -60,10 +60,10 @@ public struct ApiClient {
 #endif
         let value: A
         do {
-            value = try jsonDecoder.decode(A.self, from: data)
+            value = try decoder.decode(A.self, from: data)
         } catch let decodingError {
             do {
-                throw try jsonDecoder.decode(ApiError.self, from: data)
+                throw try decoder.decode(ApiError.self, from: data)
             } catch {
                 throw ApiError(error: decodingError)
             }
@@ -95,10 +95,10 @@ public struct ApiClient {
 #endif
         let value: A
         do {
-            value = try jsonDecoder.decode(A.self, from: data)
+            value = try decoder.decode(A.self, from: data)
         } catch let decodingError {
             do {
-                throw try jsonDecoder.decode(ApiError.self, from: data)
+                throw try decoder.decode(ApiError.self, from: data)
             } catch {
                 throw ApiError(error: decodingError)
             }
@@ -178,4 +178,14 @@ extension ApiClient {
     )
 }
 
-let jsonDecoder = JSONDecoder()
+public let encoder = { () -> JSONEncoder in
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .iso8601
+    return encoder
+}()
+
+public let decoder = { () -> JSONDecoder in
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    return decoder
+}()

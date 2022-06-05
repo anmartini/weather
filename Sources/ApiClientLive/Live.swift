@@ -72,15 +72,3 @@ private func apiRequest(
         router: router
     )
 }
-
-private let encoder = { () -> JSONEncoder in
-    let encoder = JSONEncoder()
-    encoder.dateEncodingStrategy = .iso8601
-    return encoder
-}()
-
-private let decoder = { () -> JSONDecoder in
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .iso8601
-    return decoder
-}()
