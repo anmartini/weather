@@ -14,7 +14,7 @@ import URLRouting
 extension ApiClient {
 
     public static func live(
-        baseUrl defaultBaseUrl: URL = URL(string: "https://meteo.kyntos.it")!
+        baseUrl defaultBaseUrl: URL = URL(string: "https://meteo.anmartini.it")!
     ) -> Self {
         var baseUrl: URL = defaultBaseUrl
 
@@ -55,6 +55,7 @@ private func request(
     let client = URLRoutingClient.live(
         router: router.baseURL(baseUrl.absoluteString)
     )
+    print("URL: ", router.baseURL(baseUrl.absoluteString).url(for: route))
     return try await client.data(for: route)
 }
 

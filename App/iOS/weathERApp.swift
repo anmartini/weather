@@ -29,7 +29,7 @@ struct weathERApp: App {
 extension AppEnvironment {
     static var live: Self {
         .init(
-            apiClient: .live(),
+            apiClient: .live(baseUrl: URL(string: "https://meteo.anmartini.it")!),
             mainQueue: DispatchQueue.main.eraseToAnyScheduler()
         )
     }
