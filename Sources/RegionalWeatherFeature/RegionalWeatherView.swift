@@ -33,12 +33,7 @@ public struct RegionalWeatherView: View {
         }
     }
 
-    public init(
-        store: Store<
-            RegionalWeatherState,
-            RegionalWeatherAction
-        >
-    ) {
+    public init(store: Store<RegionalWeatherState, RegionalWeatherAction>) {
         self.store = store
     }
 }
