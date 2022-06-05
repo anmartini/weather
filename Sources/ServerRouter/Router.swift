@@ -41,7 +41,7 @@ public struct ServerRouter: ParserPrinter {
             Route(.case(ServerRoute.Api.Route.regionalDay(day:))) {
                 Path {
                     "daily"
-                    "countries"
+                    "region"
                     "days"
                     Parse(.string)
                 }
