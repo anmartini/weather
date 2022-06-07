@@ -10,7 +10,7 @@ import Foundation
 public struct ZoneTime: Codable, Identifiable, Hashable {
     public let id = UUID()
     public let weather: Weather
-    
+
     enum CodingKeys: String, CodingKey {
         case weather
     }

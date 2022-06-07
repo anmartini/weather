@@ -13,9 +13,11 @@ public struct ZoneForecast: Codable, Hashable {
     public let wind: Int
     public let temperature: Temperature
 
-    public init(rain: String?,
-                wind: Int,
-                temperature: Temperature) {
+    public init(
+        rain: String?,
+        wind: Int,
+        temperature: Temperature
+    ) {
         self.rain = rain
         self.wind = wind
         self.temperature = temperature

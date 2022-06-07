@@ -1,26 +1,26 @@
 //
 //  CountryDayView.swift
-//  
+//
 //
 //  Created by Roberto Casula on 07/04/21.
 //
 
-import SwiftUI
-import SharedUtils
 import SharedModels
+import SharedUtils
+import SwiftUI
 
 struct CountryDayView: View {
 
     let countryDay: CountryDay
 
     var body: some View {
-        VStack (alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text((countryDay.readableDay ?? "giorno").capitalizedFirstLetter)
                     .font(.title)
                 Spacer()
             }
-            VStack (alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 5) {
                 FakeHtmlView(countryDay.forecast)
             }
             HStack {
@@ -53,7 +53,8 @@ struct CountryDayView_Previews: PreviewProvider {
         CountryDayView(
             countryDay: .init(
                 day: Date(),
-                forecast: "<p>Sereno tutta la <b>giornata</b>.</p><p>Temperature massime pomeridiane comprese tra 14° sui rilievi e 19° in pianura.</p><p>Velocità massima del vento compresa tra 15 (sui rilievi) e 19 km/h (in pianura).</p>",
+                forecast:
+                    "<p>Sereno tutta la <b>giornata</b>.</p><p>Temperature massime pomeridiane comprese tra 14° sui rilievi e 19° in pianura.</p><p>Velocità massima del vento compresa tra 15 (sui rilievi) e 19 km/h (in pianura).</p>",
                 updatedAt: Date(),
                 zones: []
             )

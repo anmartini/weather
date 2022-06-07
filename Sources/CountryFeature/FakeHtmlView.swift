@@ -19,7 +19,9 @@ struct FakeHtmlView: View {
     }
 
     private func formattedWithHTML(string: String) -> Text {
-        let data = Data("<XML>\(string.replacingOccurrences(of: "</p><p>", with: "\n\n").replacingOccurrences(of: "<br />", with: "\n"))</XML>".utf8)
+        let data = Data(
+            "<XML>\(string.replacingOccurrences(of: "</p><p>", with: "\n\n").replacingOccurrences(of: "<br />", with: "\n"))</XML>"
+                .utf8)
         let parser = HTML2TextParser(data: data)
         parser.delegate = parser
         if parser.parse() {
@@ -43,19 +45,22 @@ private class HTML2TextParser: XMLParser, XMLParserDelegate {
         guard contentText != "" else {
             return
         }
-        
+
         var textChunk = Text(firstChunk ? contentText.capitalizedFirstLetter : contentText)
         textChunk = isBold ? textChunk.bold() : textChunk
         textChunk = isItalic ? textChunk.italic() : textChunk
         resultText = resultText + textChunk
-        
-        if (firstChunk) {
+
+        if firstChunk {
             firstChunk = false
         }
     }
 
     // MARK: - Delegate methods of XMLParserDelegate -
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
+    func parser(
+        _ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?,
+        qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]
+    ) {
         if elementName.uppercased() == "B" {
             isBold = true
         } else if elementName.uppercased() == "I" {
@@ -63,7 +68,10 @@ private class HTML2TextParser: XMLParser, XMLParserDelegate {
         }
     }
 
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(
+        _ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?,
+        qualifiedName qName: String?
+    ) {
         if elementName.uppercased() == "B" {
             isBold = false
         } else if elementName.uppercased() == "I" {

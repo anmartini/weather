@@ -1,30 +1,26 @@
 //
 //  Client.swift
-//  
+//
 //
 //  Created by Roberto Casula on 02/04/21.
 //
 
-import Routes
 import Alamofire
-import Foundation
-import SharedModels
 import ComposableArchitecture
+import Foundation
+import Routes
+import SharedModels
 
 public struct ApiClient {
 
     public var baseUrl: () -> URL
     public var jsonDecoder: () -> JSONDecoder
-    public var request:
-        (Route) -> Effect<(data: Data, response: HTTPURLResponse?), AFError>
+    public var request: (Route) -> Effect<(data: Data, response: HTTPURLResponse?), AFError>
     public var apiRequest:
         (Route.Api.Route) -> Effect<(data: Data, response: HTTPURLResponse?), AFError>
-    public var countries:
-        () -> Effect<[Country], ApiError>
-    public var regionalDays:
-        ([String]) -> Effect<[RegionalDay], ApiError>
-    public var countryDays:
-        (Country, [String]) -> Effect<[CountryDay], ApiError>
+    public var countries: () -> Effect<[Country], ApiError>
+    public var regionalDays: ([String]) -> Effect<[RegionalDay], ApiError>
+    public var countryDays: (Country, [String]) -> Effect<[CountryDay], ApiError>
 
     public init(
         baseUrl: @escaping () -> URL,

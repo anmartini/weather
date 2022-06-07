@@ -1,14 +1,14 @@
 //
 //  CountriesView.swift
-//  
+//
 //
 //  Created by Roberto Casula on 07/04/21.
 //
 
-import SwiftUI
-import SharedModels
-import CountryFeature
 import ComposableArchitecture
+import CountryFeature
+import SharedModels
+import SwiftUI
 
 public struct CountriesView: View {
 
@@ -38,12 +38,12 @@ public struct CountriesView: View {
                 }
             }
             .overlay(
-                viewStore.isCountriesRequestInFlight ?
-                    ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .green))
+                viewStore.isCountriesRequestInFlight
+                    ? ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .green))
                     : nil
             )
-            .onAppear() {
+            .onAppear {
                 viewStore.send(.onAppear)
             }
         }
@@ -75,7 +75,7 @@ struct CountriesView_Previews: PreviewProvider {
                         Country(
                             code: "FE",
                             name: "Ferrara"
-                        )
+                        ),
                     ],
                     isCountriesRequestInFlight: false
                 ),

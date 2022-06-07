@@ -5,11 +5,11 @@
 //  Created by Roberto Casula on 07/04/21.
 //
 
-import SwiftUI
-import SharedModels
 import ApiClientLive
-import CountriesFeature
 import ComposableArchitecture
+import CountriesFeature
+import SharedModels
+import SwiftUI
 
 @main
 struct CountriesPreviewApp: App {

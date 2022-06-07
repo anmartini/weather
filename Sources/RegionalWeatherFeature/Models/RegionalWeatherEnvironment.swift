@@ -1,18 +1,17 @@
 //
 //  RegionalWeatherEnvironment.swift
-//  
+//
 //
 //  Created by Roberto Casula on 03/04/21.
 //
 
 import ApiClient
+import ComposableArchitecture
 import Foundation
 import SharedModels
-import ComposableArchitecture
 
 public struct RegionalWeatherEnvironment {
-    public var regionalDays:
-        ([String]) -> Effect<[RegionalDay], ApiError>
+    public var regionalDays: ([String]) -> Effect<[RegionalDay], ApiError>
     public var mainQueue: AnySchedulerOf<DispatchQueue>
 
     public init(

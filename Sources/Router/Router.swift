@@ -1,21 +1,23 @@
 //
 //  Router.swift
-//  
+//
 //
 //  Created by Roberto Casula on 03/04/21.
 //
 
-import Routes
 import Alamofire
 import Foundation
+import Routes
 import SharedModels
 
 public struct Router<GenericRoute> {
 
     public let request: (GenericRoute, URL) -> (url: URLConvertible, method: HTTPMethod)
 
-    public init(_ request: @escaping (GenericRoute, URL)
-                    -> (url: URLConvertible, method: HTTPMethod)) {
+    public init(
+        _ request: @escaping (GenericRoute, URL)
+            -> (url: URLConvertible, method: HTTPMethod)
+    ) {
         self.request = request
     }
 

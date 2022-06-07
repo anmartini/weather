@@ -6,9 +6,9 @@
 
 import Foundation
 
-public extension String {
+extension String {
 
-    var capitalizedFirstLetter: String {
+    public var capitalizedFirstLetter: String {
         prefix(1).uppercased() + lowercased().dropFirst()
     }
 }

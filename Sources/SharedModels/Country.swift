@@ -13,7 +13,7 @@ public struct Country: Codable, Identifiable, Hashable {
     public let id = UUID()
     public let code: String
     public let name: String
-    
+
     enum CodingKeys: String, CodingKey {
         case code, name
     }

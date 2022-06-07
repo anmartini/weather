@@ -11,8 +11,9 @@ let package = Package(
     ],
     products: [
         .library(name: "AppFeature", targets: ["AppFeature"]),
-        .library(name: "RegionalWeatherFeature",
-                 targets: ["RegionalWeatherFeature"]),
+        .library(
+            name: "RegionalWeatherFeature",
+            targets: ["RegionalWeatherFeature"]),
         .library(name: "CountriesFeature", targets: ["CountriesFeature"]),
         .library(name: "CountryFeature", targets: ["CountryFeature"]),
         .library(name: "ApiClient", targets: ["ApiClient"]),
@@ -30,7 +31,7 @@ let package = Package(
         .package(
             url: "https://github.com/Alamofire/Alamofire.git",
             .upToNextMajor(from: "5.4.1")
-        )
+        ),
     ],
     targets: [
         .target(
@@ -40,8 +41,9 @@ let package = Package(
                 "SharedModels",
                 "CountriesFeature",
                 "RegionalWeatherFeature",
-                .product(name: "ComposableArchitecture",
-                         package: "swift-composable-architecture"),
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"),
             ]
         ),
         .target(
@@ -50,8 +52,9 @@ let package = Package(
                 "ApiClient",
                 "SharedUtils",
                 "SharedModels",
-                .product(name: "ComposableArchitecture",
-                         package: "swift-composable-architecture"),
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"),
             ]
         ),
         .target(
@@ -61,8 +64,9 @@ let package = Package(
                 "SharedUtils",
                 "SharedModels",
                 "CountryFeature",
-                .product(name: "ComposableArchitecture",
-                         package: "swift-composable-architecture"),
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"),
             ]
         ),
         .target(
@@ -71,8 +75,9 @@ let package = Package(
                 "ApiClient",
                 "SharedUtils",
                 "SharedModels",
-                .product(name: "ComposableArchitecture",
-                         package: "swift-composable-architecture"),
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"),
             ]
         ),
         .target(
@@ -115,27 +120,27 @@ let package = Package(
             dependencies: [
                 "Routes",
                 "Alamofire",
-                "SharedModels"
+                "SharedModels",
             ]
         ),
         .target(
             name: "SharedUtils",
             dependencies: []
         ),
-//        .testTarget(
-//            name: "AppFeatureTests",
-//            dependencies: [
-//                "AppFeature",
-//                "TestHelpers",
-//                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
-//            ]
-//        ),
+        //        .testTarget(
+        //            name: "AppFeatureTests",
+        //            dependencies: [
+        //                "AppFeature",
+        //                "TestHelpers",
+        //                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
+        //            ]
+        //        ),
         .testTarget(
             name: "RegionalWeatherFeatureTests",
             dependencies: [
-                "RegionalWeatherFeature",
-//                "TestHelpers",
-//                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
+                "RegionalWeatherFeature"
+                //                "TestHelpers",
+                //                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
             ]
         ),
     ]

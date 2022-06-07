@@ -1,14 +1,14 @@
 //
 //  Publisher+ApiDecode.swift
-//  
+//
 //
 //  Created by Roberto Casula on 02/04/21.
 //
 
-import Combine
 import Alamofire
-import SharedModels
+import Combine
 import ComposableArchitecture
+import SharedModels
 
 extension Publisher where Output == Data, Failure == AFError {
     public func apiDecode<A: Decodable>(

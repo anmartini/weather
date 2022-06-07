@@ -5,12 +5,12 @@
 //  Created by Andrea Martini on 01/03/21.
 //
 
-import SwiftUI
 import SharedModels
+import SwiftUI
 
 struct ZoneView: View {
     let zone: Zone
-    
+
     var body: some View {
         List {
             HStack {
@@ -40,15 +40,16 @@ struct ZoneView: View {
 
 struct ZoneView_Previews: PreviewProvider {
     static var previews: some View {
-        ZoneView(zone: Zone(
-                    code: "BO",
-                    name: "Bologna",
-                    forecast: ZoneForecast(
-                        rain: nil,
-                        wind: 18,
-                        temperature: Temperature(min: 1, max: 14)
-                    ),
-                    times: []
+        ZoneView(
+            zone: Zone(
+                code: "BO",
+                name: "Bologna",
+                forecast: ZoneForecast(
+                    rain: nil,
+                    wind: 18,
+                    temperature: Temperature(min: 1, max: 14)
+                ),
+                times: []
             ))
     }
 }

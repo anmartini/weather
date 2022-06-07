@@ -1,17 +1,16 @@
 //
 //  Environment.swift
-//  
+//
 //
 //  Created by Roberto Casula on 07/04/21.
 //
 
+import ComposableArchitecture
 import Foundation
 import SharedModels
-import ComposableArchitecture
 
 public struct CountryEnvironment {
-    public var countryDays:
-        (Country, [String]) -> Effect<[CountryDay], ApiError>
+    public var countryDays: (Country, [String]) -> Effect<[CountryDay], ApiError>
     public var mainQueue: AnySchedulerOf<DispatchQueue>
 
     public init(
@@ -23,7 +22,7 @@ public struct CountryEnvironment {
     }
 
     public static let noop = Self(
-        countryDays: { _,_ in .none },
+        countryDays: { _, _ in .none },
         mainQueue: DispatchQueue.main.eraseToAnyScheduler()
     )
 }

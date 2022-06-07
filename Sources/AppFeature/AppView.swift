@@ -1,21 +1,21 @@
 //
 //  AppView.swift
-//  
+//
 //
 //  Created by Roberto Casula on 29/03/21.
 //
 
-import SwiftUI
+import ComposableArchitecture
 import CountriesFeature
 import RegionalWeatherFeature
-import ComposableArchitecture
+import SwiftUI
 
 public struct AppView: View {
 
     let store: Store<AppState, AppAction>
 
     public var body: some View {
-        TabView() {
+        TabView {
             NavigationView {
                 RegionalWeatherView(
                     store: self.store.scope(

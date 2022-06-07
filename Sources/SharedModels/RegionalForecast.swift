@@ -12,10 +12,12 @@ public struct RegionalForecast: Codable, Hashable {
     public let wind: String
     public let sea: String
 
-    public init(weather: String,
-                temperature: String,
-                wind: String,
-                sea: String) {
+    public init(
+        weather: String,
+        temperature: String,
+        wind: String,
+        sea: String
+    ) {
         self.weather = weather
         self.temperature = temperature
         self.wind = wind

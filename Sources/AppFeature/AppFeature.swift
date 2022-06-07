@@ -1,16 +1,16 @@
 //
 //  AppFeature.swift
-//  
+//
 //
 //  Created by Roberto Casula on 08/04/21.
 //
 
 import ApiClient
-import Foundation
-import SharedModels
-import CountriesFeature
-import RegionalWeatherFeature
 import ComposableArchitecture
+import CountriesFeature
+import Foundation
+import RegionalWeatherFeature
+import SharedModels
 
 public struct AppState: Equatable {
     public var regional: RegionalWeatherState
@@ -64,7 +64,6 @@ extension AppEnvironment {
         mainQueue: DispatchQueue.main.eraseToAnyScheduler()
     )
 }
-
 
 public let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
     regionalWeatherFeatureReducer

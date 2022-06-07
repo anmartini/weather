@@ -5,8 +5,8 @@
 //  Created by Roberto Casula on 28/02/21.
 //
 
-import UIKit
 import Foundation
+import UIKit
 
 extension UINavigationController {
     override open func viewDidLoad() {

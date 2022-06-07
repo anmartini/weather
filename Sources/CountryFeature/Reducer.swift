@@ -1,12 +1,12 @@
 //
 //  Reducer.swift
-//  
+//
 //
 //  Created by Roberto Casula on 07/04/21.
 //
 
-import Foundation
 import ComposableArchitecture
+import Foundation
 
 public let countryReducer = Reducer<
     CountryState, CountryAction, CountryEnvironment

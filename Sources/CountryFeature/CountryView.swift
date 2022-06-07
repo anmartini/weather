@@ -1,13 +1,13 @@
 //
 //  CountryView.swift
-//  
+//
 //
 //  Created by Roberto Casula on 07/04/21.
 //
 
-import SwiftUI
-import SharedModels
 import ComposableArchitecture
+import SharedModels
+import SwiftUI
 
 public struct CountryView: View {
 
@@ -24,12 +24,12 @@ public struct CountryView: View {
             }
             .navigationTitle(viewStore.country.name)
             .overlay(
-                viewStore.isCountryDaysRequestInFlight ?
-                    ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .green))
+                viewStore.isCountryDaysRequestInFlight
+                    ? ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .green))
                     : nil
             )
-            .onAppear() {
+            .onAppear {
                 viewStore.send(.onAppear)
             }
         }
@@ -69,4 +69,3 @@ struct CountryView_Previews: PreviewProvider {
         )
     }
 }
-

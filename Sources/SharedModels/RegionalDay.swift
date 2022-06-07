@@ -11,20 +11,20 @@ public struct RegionalDay: Codable, Identifiable, Hashable {
     public let day: Date
     public let forecast: RegionalForecast
     public let updatedAt: Date
-    
+
     public var readableDay: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
         dateFormatter.setLocalizedDateFormatFromTemplate("EEEE d MMMM")
-        
+
         return dateFormatter.string(from: day)
     }
-    
+
     public var readableUpdatedAt: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
         dateFormatter.setLocalizedDateFormatFromTemplate("dd/MM/yyyy HH:mm:ss")
-        
+
         return dateFormatter.string(from: updatedAt)
     }
 
@@ -33,9 +33,11 @@ public struct RegionalDay: Codable, Identifiable, Hashable {
         case updatedAt = "updated_at"
     }
 
-    public init(day: Date,
-                forecast: RegionalForecast,
-                updatedAt: Date) {
+    public init(
+        day: Date,
+        forecast: RegionalForecast,
+        updatedAt: Date
+    ) {
         self.day = day
         self.forecast = forecast
         self.updatedAt = updatedAt

@@ -1,13 +1,13 @@
 //
 //  CountriesState.swift
-//  
+//
 //
 //  Created by Roberto Casula on 07/04/21.
 //
 
+import CountryFeature
 import Foundation
 import SharedModels
-import CountryFeature
 
 public struct CountriesState: Equatable {
 

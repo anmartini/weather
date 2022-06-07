@@ -1,16 +1,16 @@
 //
 //  Request.swift
-//  
+//
 //
 //  Created by Roberto Casula on 03/04/21.
 //
 
+import Alamofire
+import Combine
+import ComposableArchitecture
+import Foundation
 import Router
 import Routes
-import Combine
-import Alamofire
-import Foundation
-import ComposableArchitecture
 
 func request(
     baseUrl: URL,
@@ -36,15 +36,20 @@ public func apiRequest(
     )
 }
 
-extension Publisher where Output == DataResponsePublisher<Data>.Output,
-                          Failure == Never {
+extension Publisher
+where
+    Output == DataResponsePublisher<Data>.Output,
+    Failure == Never
+{
 
     func extractError() -> AnyPublisher<
         (data: Data, response: HTTPURLResponse?), AFError
     > {
-        return self
-            .flatMap { response
-                -> AnyPublisher<(data: Data, response: HTTPURLResponse?), AFError> in
+        return
+            self
+            .flatMap {
+                response
+                    -> AnyPublisher<(data: Data, response: HTTPURLResponse?), AFError> in
                 switch response.result {
                 case .success(let data):
                     return Just((data: data, response: response.response))

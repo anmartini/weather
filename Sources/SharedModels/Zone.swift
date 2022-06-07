@@ -15,15 +15,17 @@ public struct Zone: Codable, Identifiable, Hashable {
     public let name: String
     public let forecast: ZoneForecast?
     public let times: [ZoneTime]
-    
+
     enum CodingKeys: String, CodingKey {
         case code, name, forecast, times
     }
 
-    public init(code: String,
-                name: String,
-                forecast: ZoneForecast?,
-                times: [ZoneTime]) {
+    public init(
+        code: String,
+        name: String,
+        forecast: ZoneForecast?,
+        times: [ZoneTime]
+    ) {
         self.code = code
         self.name = name
         self.forecast = forecast

@@ -5,12 +5,12 @@
 //  Created by Roberto Casula on 04/04/21.
 //
 
-import SwiftUI
 import ApiClient
-import SharedModels
 import ApiClientLive
-import RegionalWeatherFeature
 import ComposableArchitecture
+import RegionalWeatherFeature
+import SharedModels
+import SwiftUI
 
 @main
 struct RegionalWeatherPreviewApp: App {

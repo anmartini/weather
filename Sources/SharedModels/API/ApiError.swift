@@ -1,6 +1,6 @@
 //
 //  ApiError.swift
-//  
+//
 //
 //  Created by Roberto Casula on 02/04/21.
 //
