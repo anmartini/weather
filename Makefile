@@ -8,6 +8,12 @@ format:
 		./Sources ./Tests ./App Package.swift \
 		--configuration swift-format.json
 
+test:
+	@xcodebuild test \
+		-project App/weathER.xcodeproj \
+		-scheme weathER \
+		-destination platform="$(PLATFORM_IOS)"
+
 generate:
 	swiftgen
 
