@@ -56,7 +56,31 @@ struct CountryDayView_Previews: PreviewProvider {
                 forecast:
                     "<p>Sereno tutta la <b>giornata</b>.</p><p>Temperature massime pomeridiane comprese tra 14° sui rilievi e 19° in pianura.</p><p>Velocità massima del vento compresa tra 15 (sui rilievi) e 19 km/h (in pianura).</p>",
                 updatedAt: Date(),
-                zones: []
+                zones: [
+                    .init(
+                        code: "A",
+                        name: "AAA",
+                        forecast: .init(
+                            rain: "rain",
+                            wind: 2,
+                            temperature: .init(
+                                min: 10,
+                                max: 20
+                            )
+                        ),
+                        times: [
+                            .init(
+                                weather: .init(
+                                    value: "AA",
+                                    text: .init(
+                                        it: "aa",
+                                        en: "aa"
+                                    )
+                                )
+                            )
+                        ]
+                    )
+                ]
             )
         )
     }
