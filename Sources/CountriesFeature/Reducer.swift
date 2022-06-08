@@ -59,7 +59,7 @@ public let countriesReducer = Reducer<CountriesState, CountriesAction, Countries
             case .setNavigation(selection: .none):
                 state.selection = nil
                 return .none
-            case .country(_):
+            case .country:
                 return .none
             }
         }
