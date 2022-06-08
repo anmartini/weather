@@ -22,6 +22,8 @@ let package = Package(
         .library(name: "Resources", targets: ["Resources"]),
         .library(name: "SharedExtensions", targets: ["SharedExtensions"]),
         .library(name: "SharedModels", targets: ["SharedModels"]),
+        .library(name: "SharedViews", targets: ["SharedViews"]),
+        .library(name: "XCTestDebugSupport", targets: ["XCTestDebugSupport"]),
     ],
     dependencies: [
         .package(
@@ -54,6 +56,7 @@ let package = Package(
                 "ApiClient",
                 "SharedExtensions",
                 "SharedModels",
+                "SharedViews",
                 .product(name: "ComposableArchitecture",
                          package: "swift-composable-architecture"),
             ]
@@ -65,6 +68,7 @@ let package = Package(
                 "SharedExtensions",
                 "SharedModels",
                 "CountryFeature",
+                "SharedViews",
                 .product(name: "ComposableArchitecture",
                          package: "swift-composable-architecture"),
             ]
@@ -75,6 +79,7 @@ let package = Package(
                 "ApiClient",
                 "SharedExtensions",
                 "SharedModels",
+                "SharedViews",
                 .product(name: "ComposableArchitecture",
                          package: "swift-composable-architecture"),
             ]
@@ -83,6 +88,8 @@ let package = Package(
             name: "ApiClient",
             dependencies: [
                 "SharedModels",
+                "XCTestDebugSupport",
+                .product(name: "XCTestDynamicOverlay", package: "xctest-dynamic-overlay"),
             ]
         ),
         .target(
@@ -117,6 +124,13 @@ let package = Package(
         .target(
             name: "SharedModels",
             dependencies: []
+        ),
+        .target(
+            name: "SharedViews",
+            dependencies: []
+        ),
+        .target(
+            name: "XCTestDebugSupport"
         ),
 //        .testTarget(
 //            name: "AppFeatureTests",
