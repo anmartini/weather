@@ -42,8 +42,6 @@ public let countriesReducer = Reducer<CountriesState, CountriesAction, Countries
                     }
                 }
                 .map(CountriesAction.countriesResponse)
-//                    .delay(for: 1, scheduler: environment.mainQueue.eraseToAnyScheduler())
-//                    .eraseToEffect()
             case .countriesResponse(.success(let countries)):
                 state.isCountriesRequestInFlight = false
                 state.countriesRequestError = nil

@@ -42,11 +42,6 @@ public let regionalWeatherFeatureReducer = Reducer<
             }
         }
         .map(RegionalWeatherAction.regionalDaysResponse)
-//        return environment.regionalDays(days)
-//            .catchToEffect()
-//            .map(RegionalWeatherAction.regionalDaysResponse)
-//            .delay(for: 1, scheduler: environment.mainQueue.eraseToAnyScheduler())
-//            .eraseToEffect()
     case .regionalDaysResponse(.success(let days)):
         state.isRegionalDaysRequestInFlight = false
         state.regionalDaysRequestError = nil
