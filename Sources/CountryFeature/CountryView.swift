@@ -82,7 +82,7 @@ struct CountryView_Previews: PreviewProvider {
                     environment: {
                         var apiClient: ApiClient = .noop
                         apiClient.override(
-                            routeCase: /ServerRoute.Api.Route.countryDay(day:countryCode:),
+                            routeCase: /ServerRoute.Api.Route.countryDay(countryCode:day:),
                             withResponse: { _ in
                                 try await Task.sleep(nanoseconds: 2000000000)
                                 return ok(

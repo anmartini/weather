@@ -52,7 +52,7 @@ public struct ServerRouter: ParserPrinter {
                 }
             }
 
-            Route(.case(ServerRoute.Api.Route.countryDay(day:countryCode:))) {
+            Route(.case(ServerRoute.Api.Route.countryDay(countryCode:day:))) {
                 Path {
                     "daily"
                     "countries"

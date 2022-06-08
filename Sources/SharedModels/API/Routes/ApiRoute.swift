@@ -21,7 +21,7 @@ extension ServerRoute {
         public enum Route: Equatable {
             case countries
             case regionalDay(day: String)
-            case countryDay(day: String, countryCode: String)
+            case countryDay(countryCode: String, day: String)
         }
     }
 }

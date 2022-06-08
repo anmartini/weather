@@ -31,7 +31,7 @@ public let countryReducer = Reducer<
                         group.addTask(priority: .background) {
                             try await environment.apiClient
                                 .apiRequest(
-                                    route: .countryDay(day: day, countryCode: countryCode),
+                                    route: .countryDay(countryCode: countryCode, day: day),
                                     as: CountryDay.self
                                 )
                         }
@@ -44,8 +44,6 @@ public let countryReducer = Reducer<
             }
         }
         .map(CountryAction.daysResponse)
-//        .delay(for: 1, scheduler: environment.mainQueue.eraseToAnyScheduler())
-//        .eraseToEffect()
     case .daysResponse(.success(let days)):
         state.isCountryDaysRequestInFlight = false
         state.countryDays = days
@@ -56,4 +54,3 @@ public let countryReducer = Reducer<
         return .none
     }
 }
-//.debug()
