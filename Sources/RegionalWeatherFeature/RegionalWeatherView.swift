@@ -6,8 +6,8 @@
 //
 
 import ComposableArchitecture
-import SharedModels
-import SwiftUI
+import ApiClient
+import SharedViews
 
 public struct RegionalWeatherView: View {
 
@@ -15,18 +15,23 @@ public struct RegionalWeatherView: View {
 
     public var body: some View {
         WithViewStore(self.store) { viewStore in
-            List {
-                ForEach(viewStore.days) { regionalDay in
-                    RegionalWeatherCellView(regionalDay: regionalDay)
+            VStack {
+                List {
+                    if viewStore.isRegionalDaysRequestInFlight {
+                        ForEach(0..<2) { _ in
+                            RegionalWeatherCellView(
+                                regionalDay: .placeholder
+                            )
+                            .redacted(reason: .placeholder)
+                            .shimmering()
+                        }
+                    }
+
+                    ForEach(viewStore.days) { regionalDay in
+                        RegionalWeatherCellView(regionalDay: regionalDay)
+                    }
                 }
             }
-            .overlay(
-                viewStore.isRegionalDaysRequestInFlight
-                    ? ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .green))
-                    //                    .transition(AnyTransition.opacity.animation(Animation.default.delay(1.5)))
-                    : nil
-            )
             .onAppear {
                 viewStore.send(.onAppear)
             }
@@ -40,43 +45,98 @@ public struct RegionalWeatherView: View {
 
 struct RegionalWeatherView_Previews: PreviewProvider {
     static var previews: some View {
-        RegionalWeatherView(
-            store: .init(
-                initialState: .init(
-                    days: [
-                        RegionalDay(
-                            day: Date(),
-                            forecast: RegionalForecast(
-                                weather:
-                                    "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
-                                temperature:
-                                    "massime prossime a 20 gradi; valori tra 15 e 17 gradi lungo la costa.",
-                                wind:
-                                    "deboli e variabili con deboli brezze dal mare lungo la costa.",
-                                sea: "calmo."
+        Group {
+            RegionalWeatherView(
+                store: .init(
+                    initialState: .init(
+                        days: [
+                            RegionalDay(
+                                day: Date(),
+                                forecast: RegionalForecast(
+                                    weather: "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
+                                    temperature: "massime prossime a 20 gradi; valori tra 15 e 17 gradi lungo la costa.",
+                                    wind: "deboli e variabili con deboli brezze dal mare lungo la costa.",
+                                    sea: "calmo."
+                                ),
+                                updatedAt: Date()
                             ),
-                            updatedAt: Date()
-                        ),
-                        RegionalDay(
-                            day: Date(),
-                            forecast: RegionalForecast(
-                                weather:
-                                    "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
-                                temperature:
-                                    "massime prossime a 20 gradi; valori tra 15 e 17 gradi lungo la costa.",
-                                wind:
-                                    "deboli e variabili con deboli brezze dal mare lungo la costa.",
-                                sea: "calmo."
-                            ),
-                            updatedAt: Date()
-                        ),
-                    ],
-                    isRegionalDaysRequestInFlight: false,
-                    regionalDaysRequestError: nil
-                ),
-                reducer: regionalWeatherFeatureReducer,
-                environment: .noop
+                            RegionalDay(
+                                day: Date(),
+                                forecast: RegionalForecast(
+                                    weather: "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
+                                    temperature: "massime prossime a 20 gradi; valori tra 15 e 17 gradi lungo la costa.",
+                                    wind: "deboli e variabili con deboli brezze dal mare lungo la costa.",
+                                    sea: "calmo."
+                                ),
+                                updatedAt: Date()
+                            )
+                        ],
+                        isRegionalDaysRequestInFlight: false,
+                        regionalDaysRequestError: nil
+                    ),
+                    reducer: regionalWeatherFeatureReducer,
+                    environment: .noop
+                )
             )
+
+            RegionalWeatherView(
+                store: .init(
+                    initialState: .init(
+                        days: [],
+                        isRegionalDaysRequestInFlight: true,
+                        regionalDaysRequestError: nil
+                    ),
+                    reducer: regionalWeatherFeatureReducer,
+                    environment: {
+                        var apiClient: ApiClient = .noop
+                        apiClient.override(
+                            routeCase: /ServerRoute.Api.Route.regionalDay(day:),
+                            withResponse: { _ in
+                                try await Task.sleep(nanoseconds: 2000000000)
+                                return ok(
+                                    RegionalDay(
+                                        day: Date(),
+                                        forecast: RegionalForecast(
+                                            weather: "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
+                                            temperature: "massime prossime a 20 gradi; valori tra 15 e 17 gradi lungo la costa.",
+                                            wind: "deboli e variabili con deboli brezze dal mare lungo la costa.",
+                                            sea: "calmo."
+                                        ),
+                                        updatedAt: Date()
+                                    )
+                                )
+                            }
+                        )
+                        return .init(
+                            apiClient: apiClient,
+                            mainQueue: .immediate
+                        )
+                    }()
+                )
+            )
+
+            RegionalWeatherView(
+                store: .init(
+                    initialState: .init(
+                        days: [],
+                        isRegionalDaysRequestInFlight: true,
+                        regionalDaysRequestError: nil
+                    ),
+                    reducer: regionalWeatherFeatureReducer,
+                    environment: .noop
+                )
+            )
+        }
+    }
+}
+
+extension RegionalDay {
+
+    static var placeholder: Self {
+        .init(
+            day: .init(),
+            forecast: .init(weather: "", temperature: "", wind: "", sea: ""),
+            updatedAt: .init()
         )
     }
 }
