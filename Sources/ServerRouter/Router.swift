@@ -23,6 +23,11 @@ public struct ServerRouter: ParserPrinter {
         OneOf {
             Route(.case(ServerRoute.api)) {
                 Path { "api" }
+                Headers {
+                    Field("accept") {
+                        "application/json"
+                    }
+                }
                 Parse(.memberwise(ServerRoute.Api.init(route:))) {
                     self.apiRouter
                 }
