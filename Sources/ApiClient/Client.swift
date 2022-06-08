@@ -109,8 +109,9 @@ public struct ApiClient {
 }
 
 #if DEBUG
-//  import XCTestDebugSupport
+import XCTestDebugSupport
 import XCTestDynamicOverlay
+import CasePaths
 
 extension ApiClient {
     struct Unimplemented: Error {}
@@ -133,35 +134,35 @@ extension ApiClient {
         }
     )
 
-//    public mutating func override(
-//        route matchingRoute: ServerRoute.Api.Route,
-//        withResponse response: @escaping () async throws -> (value: Data, response: URLResponse)
-//    ) {
-//        let fulfill = expectation(description: "route")
-//        self.apiRequest = { [self] route in
-//            if route == matchingRoute {
-//                fulfill()
-//                return try await response()
-//            } else {
-//                return try await self.apiRequest(route)
-//            }
-//        }
-//    }
-//
-//    public mutating func override<Value>(
-//        routeCase matchingRoute: CasePath<ServerRoute.Api.Route, Value>,
-//        withResponse response: @escaping (Value) async throws -> (value: Data, response: URLResponse)
-//    ) {
-//        let fulfill = expectation(description: "route")
-//        self.apiRequest = { [self] route in
-//            if let value = matchingRoute.extract(from: route) {
-//                fulfill()
-//                return try await response(value)
-//            } else {
-//                return try await self.apiRequest(route)
-//            }
-//        }
-//    }
+    public mutating func override(
+        route matchingRoute: ServerRoute.Api.Route,
+        withResponse response: @escaping () async throws -> (value: Data, response: URLResponse)
+    ) {
+        let fulfill = expectation(description: "route")
+        self.apiRequest = { [self] route in
+            if route == matchingRoute {
+                fulfill()
+                return try await response()
+            } else {
+                return try await self.apiRequest(route)
+            }
+        }
+    }
+
+    public mutating func override<Value>(
+        routeCase matchingRoute: CasePath<ServerRoute.Api.Route, Value>,
+        withResponse response: @escaping (Value) async throws -> (value: Data, response: URLResponse)
+    ) {
+        let fulfill = expectation(description: "route")
+        self.apiRequest = { [self] route in
+            if let value = matchingRoute.extract(from: route) {
+                fulfill()
+                return try await response(value)
+            } else {
+                return try await self.apiRequest(route)
+            }
+        }
+    }
 }
 #endif
 
