@@ -36,7 +36,8 @@ let package = Package(
         .package(
             url: "https://github.com/pointfreeco/xctest-dynamic-overlay",
             from: "0.2.1"
-        )
+        ),
+        .package(url: "https://github.com/pointfreeco/swiftui-navigation", from: "0.1.0")
     ],
     targets: [
         .target(
@@ -82,6 +83,7 @@ let package = Package(
                 "SharedViews",
                 .product(name: "ComposableArchitecture",
                          package: "swift-composable-architecture"),
+                .product(name: "SwiftUINavigation", package: "swiftui-navigation")
             ]
         ),
         .target(
