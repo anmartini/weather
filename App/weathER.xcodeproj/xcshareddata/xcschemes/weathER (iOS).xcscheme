@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6551BC4D25E8018100FC4468"
+               BlueprintIdentifier = "0F45F105284C8D40002B45F1"
                BuildableName = "weathER.app"
-               BlueprintName = "weathER"
+               BlueprintName = "weathER (iOS)"
                ReferencedContainer = "container:weathER.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "RegionalWeatherFeatureTests"
-               BuildableName = "RegionalWeatherFeatureTests"
-               BlueprintName = "RegionalWeatherFeatureTests"
-               ReferencedContainer = "container:..">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -54,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6551BC4D25E8018100FC4468"
+            BlueprintIdentifier = "0F45F105284C8D40002B45F1"
             BuildableName = "weathER.app"
-            BlueprintName = "weathER"
+            BlueprintName = "weathER (iOS)"
             ReferencedContainer = "container:weathER.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -71,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6551BC4D25E8018100FC4468"
+            BlueprintIdentifier = "0F45F105284C8D40002B45F1"
             BuildableName = "weathER.app"
-            BlueprintName = "weathER"
+            BlueprintName = "weathER (iOS)"
             ReferencedContainer = "container:weathER.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
