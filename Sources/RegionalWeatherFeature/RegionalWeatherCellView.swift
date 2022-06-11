@@ -10,7 +10,6 @@ import SharedModels
 import SharedExtensions
 import ComposableArchitecture
 import SharedModels
-import SharedUtils
 import SwiftUI
 
 struct RegionalWeatherCellView: View {

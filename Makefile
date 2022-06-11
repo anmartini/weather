@@ -11,7 +11,7 @@ format:
 test:
 	@xcodebuild test \
 		-project App/weathER.xcodeproj \
-		-scheme weathER \
+		-scheme "weathER (iOS)" \
 		-destination platform="$(PLATFORM_IOS)"
 
 generate:
