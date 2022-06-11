@@ -24,7 +24,7 @@
 /* Begin PBXFileReference section */
 		0F1211D825EBDB0300E8A190 /* UINavigationController+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Colors.swift"; sourceTree = "<group>"; };
 		0F45F0EF284B33CD002B45F1 /* weather */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = weather; path = ..; sourceTree = "<group>"; };
-		0F45F106284C8D40002B45F1 /* weathER (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "weathER (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F45F106284C8D40002B45F1 /* weathER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weathER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F45F108284C8D40002B45F1 /* weathERApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weathERApp.swift; sourceTree = "<group>"; };
 		0F45F10C284C8D41002B45F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F7A77BC261A1995005EA35A /* RegionalWeatherPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegionalWeatherPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,7 +141,7 @@
 			children = (
 				0F7A77BC261A1995005EA35A /* RegionalWeatherPreview.app */,
 				0FA4A320261E2DAD00CA39AA /* CountriesPreview.app */,
-				0F45F106284C8D40002B45F1 /* weathER (iOS).app */,
+				0F45F106284C8D40002B45F1 /* weathER.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,7 +167,7 @@
 				0F45F116284C8E2E002B45F1 /* AppFeature */,
 			);
 			productName = weathER;
-			productReference = 0F45F106284C8D40002B45F1 /* weathER (iOS).app */;
+			productReference = 0F45F106284C8D40002B45F1 /* weathER.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0F7A77BB261A1995005EA35A /* RegionalWeatherPreview */ = {
@@ -345,7 +345,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = it.anmartini.weathER;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = weathER;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -374,7 +374,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = it.anmartini.weathER;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = weathER;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
