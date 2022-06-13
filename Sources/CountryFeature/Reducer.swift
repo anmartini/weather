@@ -6,7 +6,8 @@
 //
 
 import ComposableArchitecture
-import Foundation
+import SharedModels
+import ApiClient
 
 public let countryReducer = Reducer<
     CountryState, CountryAction, CountryEnvironment
@@ -20,19 +21,36 @@ public let countryReducer = Reducer<
     case .loadDays:
         state.countryDaysRequestError = nil
         state.isCountryDaysRequestInFlight = true
-        return environment.countryDays(state.country, ["1", "2", "3"])
-            .catchToEffect()
-            .map(CountryAction.daysResponse)
-            .delay(for: 1, scheduler: environment.mainQueue.eraseToAnyScheduler())
-            .eraseToEffect()
+
+        let countryCode = state.country.code
+        let days = ["1", "2", "3"]
+        return Effect.task {
+            await TaskResult {
+                try await withThrowingTaskGroup(of: CountryDay.self, returning: [CountryDay].self) { group in
+                    for day in days {
+                        group.addTask(priority: .background) {
+                            try await environment.apiClient
+                                .apiRequest(
+                                    route: .countryDay(countryCode: countryCode, day: day),
+                                    as: CountryDay.self
+                                )
+                        }
+                    }
+
+                    return try await group.reduce(into: [CountryDay](), { result, countryDay in
+                        result.append(countryDay)
+                    })
+                }
+            }
+        }
+        .map(CountryAction.daysResponse)
     case .daysResponse(.success(let days)):
         state.isCountryDaysRequestInFlight = false
         state.countryDays = days
         return .none
     case .daysResponse(.failure(let error)):
         state.isCountryDaysRequestInFlight = false
-        state.countryDaysRequestError = error
+        state.countryDaysRequestError = .init(error: error)
         return .none
     }
 }
-//.debug()

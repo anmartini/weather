@@ -6,21 +6,22 @@
 //
 
 import Foundation
-import SharedModels
 
-extension Route {
+extension ServerRoute {
 
     public struct Api: Equatable {
         public let route: Route
 
-        public init(route: Route) {
+        public init(
+            route: Route
+        ) {
             self.route = route
         }
 
         public enum Route: Equatable {
             case countries
             case regionalDay(day: String)
-            case countryDay(day: String, country: Country)
+            case countryDay(countryCode: String, day: String)
         }
     }
 }

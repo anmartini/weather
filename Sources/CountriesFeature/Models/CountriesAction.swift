@@ -8,12 +8,14 @@
 import CountryFeature
 import Foundation
 import SharedModels
+import CountryFeature
+import ComposableArchitecture
 
 public enum CountriesAction: Equatable {
 
     case onAppear
     case loadCountries
-    case countriesResponse(Result<[Country], ApiError>)
+    case countriesResponse(TaskResult<[Country]>)
 
     case setNavigation(selection: Country?)
     case country(CountryAction)

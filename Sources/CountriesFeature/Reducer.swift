@@ -6,8 +6,8 @@
 //
 
 import ComposableArchitecture
+import SharedModels
 import CountryFeature
-import Foundation
 
 public let countriesReducer = Reducer<CountriesState, CountriesAction, CountriesEnvironment>
     .combine(
@@ -18,7 +18,7 @@ public let countriesReducer = Reducer<CountriesState, CountriesAction, Countries
                 action: /CountriesAction.country,
                 environment: {
                     CountryEnvironment(
-                        countryDays: $0.countryDays,
+                        apiClient: $0.apiClient,
                         mainQueue: $0.mainQueue
                     )
                 }
@@ -33,11 +33,16 @@ public let countriesReducer = Reducer<CountriesState, CountriesAction, Countries
             case .loadCountries:
                 state.isCountriesRequestInFlight = true
                 state.countriesRequestError = nil
-                return environment.countries()
-                    .catchToEffect()
-                    .map(CountriesAction.countriesResponse)
-                    .delay(for: 1, scheduler: environment.mainQueue.eraseToAnyScheduler())
-                    .eraseToEffect()
+                return Effect.task {
+                    await TaskResult {
+                        try await environment.apiClient
+                            .apiRequest(
+                                route: .countries,
+                                as: [Country].self
+                            )
+                    }
+                }
+                .map(CountriesAction.countriesResponse)
             case .countriesResponse(.success(let countries)):
                 state.isCountriesRequestInFlight = false
                 state.countriesRequestError = nil
@@ -45,7 +50,7 @@ public let countriesReducer = Reducer<CountriesState, CountriesAction, Countries
                 return .none
             case .countriesResponse(.failure(let error)):
                 state.isCountriesRequestInFlight = false
-                state.countriesRequestError = error
+                state.countriesRequestError = .init(error: error)
                 return .none
             case .setNavigation(selection: .some(let country)):
                 state.selection = .init(country: country)
@@ -53,7 +58,7 @@ public let countriesReducer = Reducer<CountriesState, CountriesAction, Countries
             case .setNavigation(selection: .none):
                 state.selection = nil
                 return .none
-            case .country(_):
+            case .country:
                 return .none
             }
         }

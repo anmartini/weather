@@ -10,4 +10,9 @@ import Foundation
 public struct WeatherText: Codable, Hashable {
     public let it: String
     public let en: String
+
+    public init(it: String, en: String) {
+        self.it = it
+        self.en = en
+    }
 }

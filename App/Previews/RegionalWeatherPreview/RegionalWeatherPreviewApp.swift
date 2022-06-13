@@ -21,17 +21,35 @@ struct RegionalWeatherPreviewApp: App {
                     store: .init(
                         initialState: .initialState,
                         reducer: regionalWeatherFeatureReducer,
-                        environment: .init(
-                            regionalDays: loadRegionalDays(_:)
-                        )
+                        environment: {
+                            var apiClient: ApiClient = .noop
+                            apiClient.override(
+                                routeCase: /ServerRoute.Api.Route.regionalDay(day:),
+                                withResponse: { _ in
+                                    try await Task.sleep(nanoseconds: 2000000000)
+                                    return ok(
+                                        RegionalDay(
+                                            day: Date(),
+                                            forecast: RegionalForecast(
+                                                weather: "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
+                                                temperature: "massime prossime a 20 gradi; valori tra 15 e 17 gradi lungo la costa.",
+                                                wind: "deboli e variabili con deboli brezze dal mare lungo la costa.",
+                                                sea: "calmo."
+                                            ),
+                                            updatedAt: Date()
+                                        )
+                                    )
+                                }
+                            )
+                            return .init(
+                                apiClient: apiClient,
+                                mainQueue: .immediate
+                            )
+                        }()
                     )
                 )
                 .navigationTitle("Regional days")
             }
         }
     }
-}
-
-func loadRegionalDays(_ days: [String]) -> Effect<[RegionalDay], ApiError> {
-    return ApiClient.live().regionalDays(["1", "2", "3"])
 }

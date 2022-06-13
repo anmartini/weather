@@ -46,15 +46,14 @@ public struct AppEnvironment {
 extension AppEnvironment {
     var regionalWeather: RegionalWeatherEnvironment {
         .init(
-            regionalDays: apiClient.regionalDays,
+            apiClient: apiClient,
             mainQueue: mainQueue
         )
     }
 
     var countries: CountriesEnvironment {
         .init(
-            countries: apiClient.countries,
-            countryDays: apiClient.countryDays,
+            apiClient: apiClient,
             mainQueue: mainQueue
         )
     }

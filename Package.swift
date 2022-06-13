@@ -1,37 +1,43 @@
 // swift-tools-version:5.5
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "weather",
+    defaultLocalization: "en",
     platforms: [
+        .iOS(.v15),
+        .watchOS(.v7),
+        .tvOS(.v15),
         .macOS(.v11),
-        .iOS(.v14),
     ],
     products: [
         .library(name: "AppFeature", targets: ["AppFeature"]),
-        .library(
-            name: "RegionalWeatherFeature",
-            targets: ["RegionalWeatherFeature"]),
+        .library(name: "RegionalWeatherFeature", targets: ["RegionalWeatherFeature"]),
         .library(name: "CountriesFeature", targets: ["CountriesFeature"]),
         .library(name: "CountryFeature", targets: ["CountryFeature"]),
         .library(name: "ApiClient", targets: ["ApiClient"]),
         .library(name: "ApiClientLive", targets: ["ApiClientLive"]),
+        .library(name: "ServerRouter", targets: ["ServerRouter"]),
+        .library(name: "Resources", targets: ["Resources"]),
+        .library(name: "SharedExtensions", targets: ["SharedExtensions"]),
         .library(name: "SharedModels", targets: ["SharedModels"]),
-        .library(name: "Router", targets: ["Router"]),
-        .library(name: "Routes", targets: ["Routes"]),
-        .library(name: "SharedUtils", targets: ["SharedUtils"]),
+        .library(name: "SharedViews", targets: ["SharedViews"]),
+        .library(name: "XCTestDebugSupport", targets: ["XCTestDebugSupport"]),
     ],
     dependencies: [
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture.git",
-            .upToNextMajor(from: "0.17.0")
+            branch: "concurrency-updates"
+//            .upToNextMajor(from: "0.36.0")
         ),
+        .package(url: "http://github.com/pointfreeco/swift-url-routing", from: "0.2.0"),
+        .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.9.2"),
         .package(
-            url: "https://github.com/Alamofire/Alamofire.git",
-            .upToNextMajor(from: "5.4.1")
+            url: "https://github.com/pointfreeco/xctest-dynamic-overlay",
+            from: "0.2.1"
         ),
+        .package(url: "https://github.com/pointfreeco/swiftui-navigation", from: "0.1.0")
     ],
     targets: [
         .target(
@@ -41,106 +47,107 @@ let package = Package(
                 "SharedModels",
                 "CountriesFeature",
                 "RegionalWeatherFeature",
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture"),
+                .product(name: "ComposableArchitecture",
+                         package: "swift-composable-architecture"),
             ]
         ),
         .target(
             name: "RegionalWeatherFeature",
             dependencies: [
                 "ApiClient",
-                "SharedUtils",
+                "SharedExtensions",
                 "SharedModels",
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture"),
+                "SharedViews",
+                .product(name: "ComposableArchitecture",
+                         package: "swift-composable-architecture"),
             ]
         ),
         .target(
             name: "CountriesFeature",
             dependencies: [
                 "ApiClient",
-                "SharedUtils",
+                "SharedExtensions",
                 "SharedModels",
                 "CountryFeature",
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture"),
+                "SharedViews",
+                .product(name: "ComposableArchitecture",
+                         package: "swift-composable-architecture"),
             ]
         ),
         .target(
             name: "CountryFeature",
             dependencies: [
                 "ApiClient",
-                "SharedUtils",
+                "SharedExtensions",
                 "SharedModels",
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture"),
+                "SharedViews",
+                .product(name: "ComposableArchitecture",
+                         package: "swift-composable-architecture"),
+                .product(name: "SwiftUINavigation", package: "swiftui-navigation")
             ]
         ),
         .target(
             name: "ApiClient",
             dependencies: [
-                "Routes",
-                "Alamofire",
                 "SharedModels",
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture"
-                ),
+                "XCTestDebugSupport",
+                .product(name: "XCTestDynamicOverlay", package: "xctest-dynamic-overlay"),
             ]
         ),
         .target(
             name: "ApiClientLive",
             dependencies: [
-                "Router",
-                "Routes",
                 "ApiClient",
+                "ServerRouter",
                 "SharedModels",
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture"
-                ),
+//                .product(
+//                    name: "ComposableArchitecture",
+//                    package: "swift-composable-architecture"
+//                ),
             ]
+        ),
+        .target(
+            name: "ServerRouter",
+            dependencies: [
+                "SharedModels",
+                .product(name: "Parsing", package: "swift-parsing"),
+                .product(name: "URLRouting", package: "swift-url-routing"),
+                .product(name: "XCTestDynamicOverlay", package: "xctest-dynamic-overlay"),
+            ]
+        ),
+        .target(
+            name: "Resources",
+            dependencies: []
+        ),
+        .target(
+            name: "SharedExtensions",
+            dependencies: []
         ),
         .target(
             name: "SharedModels",
             dependencies: []
         ),
         .target(
-            name: "Routes",
-            dependencies: [
-                "SharedModels"
-            ]
-        ),
-        .target(
-            name: "Router",
-            dependencies: [
-                "Routes",
-                "Alamofire",
-                "SharedModels",
-            ]
-        ),
-        .target(
-            name: "SharedUtils",
+            name: "SharedViews",
             dependencies: []
         ),
-        //        .testTarget(
-        //            name: "AppFeatureTests",
-        //            dependencies: [
-        //                "AppFeature",
-        //                "TestHelpers",
-        //                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
-        //            ]
-        //        ),
+        .target(
+            name: "XCTestDebugSupport"
+        ),
+//        .testTarget(
+//            name: "AppFeatureTests",
+//            dependencies: [
+//                "AppFeature",
+//                "TestHelpers",
+//                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
+//            ]
+//        ),
         .testTarget(
             name: "RegionalWeatherFeatureTests",
             dependencies: [
-                "RegionalWeatherFeature"
-                //                "TestHelpers",
-                //                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
+                "RegionalWeatherFeature",
+//                "TestHelpers",
+//                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
             ]
         ),
     ]

@@ -7,7 +7,6 @@
 
 import Foundation
 
-public enum Route: Equatable {
-
+public enum ServerRoute: Equatable {
     case api(Api)
 }

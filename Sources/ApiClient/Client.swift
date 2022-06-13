@@ -1,115 +1,192 @@
 //
 //  Client.swift
-//
+//  
 //
 //  Created by Roberto Casula on 02/04/21.
 //
 
-import Alamofire
-import ComposableArchitecture
 import Foundation
-import Routes
 import SharedModels
 
 public struct ApiClient {
 
+    public var request: (ServerRoute) async throws -> (value: Data, response: URLResponse)
+    public var apiRequest: (ServerRoute.Api.Route) async throws -> (value: Data, response: URLResponse)
     public var baseUrl: () -> URL
-    public var jsonDecoder: () -> JSONDecoder
-    public var request: (Route) -> Effect<(data: Data, response: HTTPURLResponse?), AFError>
-    public var apiRequest:
-        (Route.Api.Route) -> Effect<(data: Data, response: HTTPURLResponse?), AFError>
-    public var countries: () -> Effect<[Country], ApiError>
-    public var regionalDays: ([String]) -> Effect<[RegionalDay], ApiError>
-    public var countryDays: (Country, [String]) -> Effect<[CountryDay], ApiError>
+    public var setBaseUrl: (URL) async -> Void
 
     public init(
+        request: @escaping (ServerRoute) async throws -> (value: Data, response: URLResponse),
+        apiRequest: @escaping (ServerRoute.Api.Route) async throws -> (value: Data, response: URLResponse),
         baseUrl: @escaping () -> URL,
-        jsonDecoder: @escaping () -> JSONDecoder,
-        request: @escaping (Route) -> Effect<
-            (data: Data, response: HTTPURLResponse?), AFError
-        >,
-        apiRequest: @escaping (Route.Api.Route) -> Effect<
-            (data: Data, response: HTTPURLResponse?), AFError
-        >,
-        countries: @escaping () -> Effect<[Country], ApiError>,
-        regionalDays: @escaping ([String]) -> Effect<[RegionalDay], ApiError>,
-        countryDays: @escaping (Country, [String]) -> Effect<[CountryDay], ApiError>
+        setBaseUrl: @escaping (URL) async -> Void
     ) {
-        self.baseUrl = baseUrl
-        self.jsonDecoder = jsonDecoder
         self.request = request
         self.apiRequest = apiRequest
-        self.countries = countries
-        self.regionalDays = regionalDays
-        self.countryDays = countryDays
+        self.baseUrl = baseUrl
+        self.setBaseUrl = setBaseUrl
+    }
+
+    public struct Unit: Codable {}
+
+    public func apiRequest(
+        route: ServerRoute.Api.Route,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) async throws {
+        _ = try await self.apiRequest(route: route, as: Unit.self, file: file, line: line)
+    }
+
+    public func apiRequest<A: Decodable>(
+        route: ServerRoute.Api.Route,
+        as: A.Type,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) async throws -> A {
+        let (data, response): (Data, URLResponse)
+        do {
+            (data, response) = try await self.apiRequest(route)
+        } catch {
+            throw ApiError(error: error)
+        }
+#if DEBUG
+        print(
+        """
+          API: route: \(route), \
+          status: \((response as? HTTPURLResponse)?.statusCode ?? 0), \
+          receive data: \(String(decoding: data, as: UTF8.self))
+        """
+        )
+#endif
+        let value: A
+        do {
+            value = try decoder.decode(A.self, from: data)
+        } catch let decodingError {
+            do {
+                throw try decoder.decode(ApiError.self, from: data)
+            } catch {
+                throw ApiError(error: decodingError)
+            }
+        }
+
+        return value
+    }
+
+    public func request<A: Decodable>(
+        route: ServerRoute,
+        as: A.Type,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) async throws -> A {
+        let (data, response): (Data, URLResponse)
+        do {
+            (data, response) = try await self.request(route)
+        } catch {
+            throw ApiError(error: error)
+        }
+#if DEBUG
+        print(
+        """
+          API: route: \(route), \
+          status: \((response as? HTTPURLResponse)?.statusCode ?? 0), \
+          receive data: \(String(decoding: data, as: UTF8.self))
+        """
+        )
+#endif
+        let value: A
+        do {
+            value = try decoder.decode(A.self, from: data)
+        } catch let decodingError {
+            do {
+                throw try decoder.decode(ApiError.self, from: data)
+            } catch {
+                throw ApiError(error: decodingError)
+            }
+        }
+
+        return value
     }
 }
 
+#if DEBUG
+import XCTestDebugSupport
+import XCTestDynamicOverlay
+import CasePaths
+
+extension ApiClient {
+    struct Unimplemented: Error {}
+    public static let failing = Self(
+        request: { route in
+            XCTFail("\(Self.self).request(\(route)) is unimplemented")
+            throw Unimplemented()
+        },
+        apiRequest: { route in
+            XCTFail("\(Self.self).apiRequest(\(route)) is unimplemented")
+            throw Unimplemented()
+        },
+
+        baseUrl: {
+            XCTFail("\(Self.self).baseUrl is unimplemented")
+            return .init(string: "/")!
+        },
+        setBaseUrl: { _ in
+            XCTFail("ApiClient.setBaseUrl is unimplemented")
+        }
+    )
+
+    public mutating func override(
+        route matchingRoute: ServerRoute.Api.Route,
+        withResponse response: @escaping () async throws -> (value: Data, response: URLResponse)
+    ) {
+        let fulfill = expectation(description: "route")
+        self.apiRequest = { [self] route in
+            if route == matchingRoute {
+                fulfill()
+                return try await response()
+            } else {
+                return try await self.apiRequest(route)
+            }
+        }
+    }
+
+    public mutating func override<Value>(
+        routeCase matchingRoute: CasePath<ServerRoute.Api.Route, Value>,
+        withResponse response: @escaping (Value) async throws -> (value: Data, response: URLResponse)
+    ) {
+        let fulfill = expectation(description: "route")
+        self.apiRequest = { [self] route in
+            if let value = matchingRoute.extract(from: route) {
+                fulfill()
+                return try await response(value)
+            } else {
+                return try await self.apiRequest(route)
+            }
+        }
+    }
+}
+#endif
+
 extension ApiClient {
     public static let noop = Self(
+        request: { _ in
+            (Data(), URLResponse())
+        },
+        apiRequest: { _ in
+            (Data(), URLResponse())
+        },
         baseUrl: { URL(string: "/")! },
-        jsonDecoder: { JSONDecoder() },
-        request: { _ in .none },
-        apiRequest: { _ in .none },
-        countries: { .none },
-        regionalDays: { _ in .none },
-        countryDays: { _, _ in .none }
+        setBaseUrl: { _ in }
     )
 }
 
-//extension ApiClient {
-//
-//    public func apiRequest<A: Decodable>(
-//        route: Route.Api.Route,
-//        as: A.Type,
-//        file: StaticString = #file,
-//        line: UInt = #line
-//    ) -> Effect<A, ApiError> {
-//        self.apiRequest(route)
-//            .handleEvents(
-//                receiveOutput: {
-//                    #if DEBUG
-//                    debugPrint(
-//                        """
-//                        API: route: \(route), \
-//                        status: \($0.response?.statusCode ?? 0), \
-//                        receive data: \(String(decoding: $0.data, as: UTF8.self))
-//                        """
-//                    )
-//                    #endif
-//                }
-//            )
-//            .map(\.data)
-//            .apiDecode(as: A.self, file: file, line: line)
-//            .print("API")
-//            .eraseToEffect()
-//    }
-//
-//    public func request<A: Decodable>(
-//        route: Route,
-//        as: A.Type,
-//        file: StaticString = #file,
-//        line: UInt = #line
-//    ) -> Effect<A, ApiError> {
-//        self.request(route)
-//            .handleEvents(
-//                receiveOutput: {
-//                    #if DEBUG
-//                    debugPrint(
-//                        """
-//                        API: route: \(route), \
-//                        status: \($0.response?.statusCode ?? 0), \
-//                        receive data: \(String(decoding: $0.data, as: UTF8.self))
-//                        """
-//                    )
-//                    #endif
-//                }
-//            )
-//            .map(\.data)
-//            .apiDecode(as: A.self, file: file, line: line)
-//            .print("API")
-//            .eraseToEffect()
-//    }
-//}
-//
-//let jsonDecoder = JSONDecoder()
+public let encoder = { () -> JSONEncoder in
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .iso8601
+    return encoder
+}()
+
+public let decoder = { () -> JSONDecoder in
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    return decoder
+}()

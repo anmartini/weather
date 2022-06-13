@@ -5,6 +5,9 @@
 //  Created by Roberto Casula on 07/04/21.
 //
 
+import ApiClient
+import SwiftUI
+import SharedModels
 import ApiClientLive
 import ComposableArchitecture
 import CountriesFeature
@@ -20,22 +23,59 @@ struct CountriesPreviewApp: App {
                     store: .init(
                         initialState: .initialState,
                         reducer: countriesReducer,
-                        environment: CountriesEnvironment(
-                            countries: loadCountries,
-                            countryDays: loadCountryDays(country:days:)
-                        )
+                        environment: {
+                            var apiClient: ApiClient = .noop
+                            apiClient.override(
+                                routeCase: /ServerRoute.Api.Route.countries,
+                                withResponse: { _ in
+                                    try await Task.sleep(nanoseconds: 3000000000)
+                                    return ok(
+                                        [
+                                            Country(
+                                                code: "PR",
+                                                name: "Parma"
+                                            ),
+                                            Country(
+                                                code: "RE",
+                                                name: "Reggio Emilia"
+                                            ),
+                                            Country(
+                                                code: "BO",
+                                                name: "Bologna"
+                                            ),
+                                            Country(
+                                                code: "FE",
+                                                name: "Ferrara"
+                                            )
+                                        ]
+                                    )
+                                }
+                            )
+                            apiClient.override(
+                                routeCase: /ServerRoute.Api.Route.countryDay(day:countryCode:),
+                                withResponse: { _ in
+                                    try await Task.sleep(nanoseconds: 2000000000)
+                                    return ok(
+                                        CountryDay(
+                                            day: .init(),
+                                            forecast: "asdasd",
+                                            updatedAt: .init(),
+                                            zones: [
+                                                .init(code: "--", name: "--", forecast: nil, times: [])
+                                            ]
+                                        )
+                                    )
+                                }
+                            )
+                            return .init(
+                                apiClient: apiClient,
+                                mainQueue: .immediate
+                            )
+                        }()
                     )
                 )
                 .navigationTitle("Countries")
             }
         }
     }
-}
-
-func loadCountries() -> Effect<[Country], ApiError> {
-    return ApiClient.live().countries()
-}
-
-func loadCountryDays(country: Country, days: [String]) -> Effect<[CountryDay], ApiError> {
-    return ApiClient.live().countryDays(days, country)
 }
