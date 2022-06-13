@@ -26,14 +26,17 @@ struct RegionalWeatherPreviewApp: App {
                             apiClient.override(
                                 routeCase: /ServerRoute.Api.Route.regionalDay(day:),
                                 withResponse: { _ in
-                                    try await Task.sleep(nanoseconds: 2000000000)
+                                    try await Task.sleep(nanoseconds: 2_000_000_000)
                                     return ok(
                                         RegionalDay(
                                             day: Date(),
                                             forecast: RegionalForecast(
-                                                weather: "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
-                                                temperature: "massime prossime a 20 gradi; valori tra 15 e 17 gradi lungo la costa.",
-                                                wind: "deboli e variabili con deboli brezze dal mare lungo la costa.",
+                                                weather:
+                                                    "cielo sereno o poco nuvoloso. Formazione di banchi di nebbia nella notte a cominciare dalla costa e dal ferrarese.",
+                                                temperature:
+                                                    "massime prossime a 20 gradi; valori tra 15 e 17 gradi lungo la costa.",
+                                                wind:
+                                                    "deboli e variabili con deboli brezze dal mare lungo la costa.",
                                                 sea: "calmo."
                                             ),
                                             updatedAt: Date()

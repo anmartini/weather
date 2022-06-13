@@ -6,8 +6,6 @@
 //
 
 import ApiClient
-import SwiftUI
-import SharedModels
 import ApiClientLive
 import ComposableArchitecture
 import CountriesFeature
@@ -28,7 +26,7 @@ struct CountriesPreviewApp: App {
                             apiClient.override(
                                 routeCase: /ServerRoute.Api.Route.countries,
                                 withResponse: { _ in
-                                    try await Task.sleep(nanoseconds: 3000000000)
+                                    try await Task.sleep(nanoseconds: 3_000_000_000)
                                     return ok(
                                         [
                                             Country(
@@ -46,7 +44,7 @@ struct CountriesPreviewApp: App {
                                             Country(
                                                 code: "FE",
                                                 name: "Ferrara"
-                                            )
+                                            ),
                                         ]
                                     )
                                 }
@@ -54,14 +52,16 @@ struct CountriesPreviewApp: App {
                             apiClient.override(
                                 routeCase: /ServerRoute.Api.Route.countryDay(day:countryCode:),
                                 withResponse: { _ in
-                                    try await Task.sleep(nanoseconds: 2000000000)
+                                    try await Task.sleep(nanoseconds: 2_000_000_000)
                                     return ok(
                                         CountryDay(
                                             day: .init(),
                                             forecast: "asdasd",
                                             updatedAt: .init(),
                                             zones: [
-                                                .init(code: "--", name: "--", forecast: nil, times: [])
+                                                .init(
+                                                    code: "--", name: "--", forecast: nil, times: []
+                                                )
                                             ]
                                         )
                                     )

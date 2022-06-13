@@ -5,11 +5,11 @@
 //  Created by Roberto Casula on 07/04/21.
 //
 
-import ComposableArchitecture
 import ApiClient
+import ComposableArchitecture
+import SharedModels
 import SharedViews
 import SwiftUI
-import SharedModels
 
 public struct CountryView: View {
 
@@ -23,8 +23,8 @@ public struct CountryView: View {
                 if viewStore.isCountryDaysRequestInFlight {
                     ForEach(0..<2) { _ in
                         CountryDayView(countryDay: .placeholder)
-                        .redacted(reason: .placeholder)
-                        .shimmering()
+                            .redacted(reason: .placeholder)
+                            .shimmering()
                     }
                 }
 
@@ -33,7 +33,7 @@ public struct CountryView: View {
                 }
             }
             .navigationTitle(viewStore.country.name)
-            .onAppear() {
+            .onAppear {
                 viewStore.send(.onAppear)
             }
         }
@@ -68,7 +68,7 @@ struct CountryView_Previews: PreviewProvider {
                                         code: "P",
                                         name: "pianura e capoluogo",
                                         forecast: .init(
-                                            rain: "rain", // nil
+                                            rain: "rain",  // nil
                                             wind: 32,
                                             temperature: .init(
                                                 min: 15,
@@ -87,47 +87,47 @@ struct CountryView_Previews: PreviewProvider {
                                             )
                                         ]
                                     )
-//                                    .init(
-//                                        code: "P",
-//                                        name: "pianura e capoluogo",
-//                                        forecast: .init(
-//                                            rain: "rain", // nil
-//                                            wind: 32,
-//                                            temperature: .init(
-//                                                min: 15,
-//                                                max: 27
-//                                            )
-//                                        ),
-//                                        times: [
-//                                            .init(
-//                                                weather: .init(
-//                                                    value: "a003a003",
-//                                                    text: .init(
-//                                                        it: "sereno o poco nuvoloso",
-//                                                        en: "partly cloudy"
-//                                                    )
-//                                                )
-//                                            ),
-//                                            .init(
-//                                                weather: .init(
-//                                                    value: "a003a003",
-//                                                    text: .init(
-//                                                        it: "sereno o poco nuvoloso",
-//                                                        en: "partly cloudy"
-//                                                    )
-//                                                )
-//                                            ),
-//                                            .init(
-//                                                weather: .init(
-//                                                    value: "b005b016",
-//                                                    text: .init(
-//                                                        it: "tendenza ad attenuazione della nuvolosità",
-//                                                        en: "decreasing cloudiness tendency"
-//                                                    )
-//                                                )
-//                                            )
-//                                        ]
-//                                    )
+                                    //                                    .init(
+                                    //                                        code: "P",
+                                    //                                        name: "pianura e capoluogo",
+                                    //                                        forecast: .init(
+                                    //                                            rain: "rain", // nil
+                                    //                                            wind: 32,
+                                    //                                            temperature: .init(
+                                    //                                                min: 15,
+                                    //                                                max: 27
+                                    //                                            )
+                                    //                                        ),
+                                    //                                        times: [
+                                    //                                            .init(
+                                    //                                                weather: .init(
+                                    //                                                    value: "a003a003",
+                                    //                                                    text: .init(
+                                    //                                                        it: "sereno o poco nuvoloso",
+                                    //                                                        en: "partly cloudy"
+                                    //                                                    )
+                                    //                                                )
+                                    //                                            ),
+                                    //                                            .init(
+                                    //                                                weather: .init(
+                                    //                                                    value: "a003a003",
+                                    //                                                    text: .init(
+                                    //                                                        it: "sereno o poco nuvoloso",
+                                    //                                                        en: "partly cloudy"
+                                    //                                                    )
+                                    //                                                )
+                                    //                                            ),
+                                    //                                            .init(
+                                    //                                                weather: .init(
+                                    //                                                    value: "b005b016",
+                                    //                                                    text: .init(
+                                    //                                                        it: "tendenza ad attenuazione della nuvolosità",
+                                    //                                                        en: "decreasing cloudiness tendency"
+                                    //                                                    )
+                                    //                                                )
+                                    //                                            )
+                                    //                                        ]
+                                    //                                    )
                                 ]
                             ),
                             .init(
@@ -135,49 +135,49 @@ struct CountryView_Previews: PreviewProvider {
                                 forecast: "asdasd",
                                 updatedAt: .init(),
                                 zones: [
-//                                    .init(
-//                                        code: "P",
-//                                        name: "pianura e capoluogo",
-//                                        forecast: .init(
-//                                            rain: "rain", // nil
-//                                            wind: 32,
-//                                            temperature: .init(
-//                                                min: 15,
-//                                                max: 27
-//                                            )
-//                                        ),
-//                                        times: [
-//                                            .init(
-//                                                weather: .init(
-//                                                    value: "a003a003",
-//                                                    text: .init(
-//                                                        it: "sereno o poco nuvoloso",
-//                                                        en: "partly cloudy"
-//                                                    )
-//                                                )
-//                                            ),
-//                                            .init(
-//                                                weather: .init(
-//                                                    value: "a003a003",
-//                                                    text: .init(
-//                                                        it: "sereno o poco nuvoloso",
-//                                                        en: "partly cloudy"
-//                                                    )
-//                                                )
-//                                            ),
-//                                            .init(
-//                                                weather: .init(
-//                                                    value: "b005b016",
-//                                                    text: .init(
-//                                                        it: "tendenza ad attenuazione della nuvolosità",
-//                                                        en: "decreasing cloudiness tendency"
-//                                                    )
-//                                                )
-//                                            )
-//                                        ]
-//                                    )
+                                    //                                    .init(
+                                    //                                        code: "P",
+                                    //                                        name: "pianura e capoluogo",
+                                    //                                        forecast: .init(
+                                    //                                            rain: "rain", // nil
+                                    //                                            wind: 32,
+                                    //                                            temperature: .init(
+                                    //                                                min: 15,
+                                    //                                                max: 27
+                                    //                                            )
+                                    //                                        ),
+                                    //                                        times: [
+                                    //                                            .init(
+                                    //                                                weather: .init(
+                                    //                                                    value: "a003a003",
+                                    //                                                    text: .init(
+                                    //                                                        it: "sereno o poco nuvoloso",
+                                    //                                                        en: "partly cloudy"
+                                    //                                                    )
+                                    //                                                )
+                                    //                                            ),
+                                    //                                            .init(
+                                    //                                                weather: .init(
+                                    //                                                    value: "a003a003",
+                                    //                                                    text: .init(
+                                    //                                                        it: "sereno o poco nuvoloso",
+                                    //                                                        en: "partly cloudy"
+                                    //                                                    )
+                                    //                                                )
+                                    //                                            ),
+                                    //                                            .init(
+                                    //                                                weather: .init(
+                                    //                                                    value: "b005b016",
+                                    //                                                    text: .init(
+                                    //                                                        it: "tendenza ad attenuazione della nuvolosità",
+                                    //                                                        en: "decreasing cloudiness tendency"
+                                    //                                                    )
+                                    //                                                )
+                                    //                                            )
+                                    //                                        ]
+                                    //                                    )
                                 ]
-                            )
+                            ),
                         ],
                         isCountryDaysRequestInFlight: false
                     ),
@@ -199,7 +199,7 @@ struct CountryView_Previews: PreviewProvider {
                         apiClient.override(
                             routeCase: /ServerRoute.Api.Route.countryDay(countryCode:day:),
                             withResponse: { _ in
-                                try await Task.sleep(nanoseconds: 2000000000)
+                                try await Task.sleep(nanoseconds: 2_000_000_000)
                                 return ok(
                                     CountryDay(
                                         day: .init(),

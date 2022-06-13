@@ -29,7 +29,7 @@ let package = Package(
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture.git",
             branch: "concurrency-updates"
-//            .upToNextMajor(from: "0.36.0")
+                //            .upToNextMajor(from: "0.36.0")
         ),
         .package(url: "http://github.com/pointfreeco/swift-url-routing", from: "0.2.0"),
         .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.9.2"),
@@ -37,7 +37,7 @@ let package = Package(
             url: "https://github.com/pointfreeco/xctest-dynamic-overlay",
             from: "0.2.1"
         ),
-        .package(url: "https://github.com/pointfreeco/swiftui-navigation", from: "0.1.0")
+        .package(url: "https://github.com/pointfreeco/swiftui-navigation", from: "0.1.0"),
     ],
     targets: [
         .target(
@@ -47,8 +47,9 @@ let package = Package(
                 "SharedModels",
                 "CountriesFeature",
                 "RegionalWeatherFeature",
-                .product(name: "ComposableArchitecture",
-                         package: "swift-composable-architecture"),
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"),
             ]
         ),
         .target(
@@ -58,8 +59,9 @@ let package = Package(
                 "SharedExtensions",
                 "SharedModels",
                 "SharedViews",
-                .product(name: "ComposableArchitecture",
-                         package: "swift-composable-architecture"),
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"),
             ]
         ),
         .target(
@@ -70,8 +72,9 @@ let package = Package(
                 "SharedModels",
                 "CountryFeature",
                 "SharedViews",
-                .product(name: "ComposableArchitecture",
-                         package: "swift-composable-architecture"),
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"),
             ]
         ),
         .target(
@@ -81,9 +84,10 @@ let package = Package(
                 "SharedExtensions",
                 "SharedModels",
                 "SharedViews",
-                .product(name: "ComposableArchitecture",
-                         package: "swift-composable-architecture"),
-                .product(name: "SwiftUINavigation", package: "swiftui-navigation")
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"),
+                .product(name: "SwiftUINavigation", package: "swiftui-navigation"),
             ]
         ),
         .target(
@@ -100,10 +104,10 @@ let package = Package(
                 "ApiClient",
                 "ServerRouter",
                 "SharedModels",
-//                .product(
-//                    name: "ComposableArchitecture",
-//                    package: "swift-composable-architecture"
-//                ),
+                //                .product(
+                //                    name: "ComposableArchitecture",
+                //                    package: "swift-composable-architecture"
+                //                ),
             ]
         ),
         .target(
@@ -134,20 +138,20 @@ let package = Package(
         .target(
             name: "XCTestDebugSupport"
         ),
-//        .testTarget(
-//            name: "AppFeatureTests",
-//            dependencies: [
-//                "AppFeature",
-//                "TestHelpers",
-//                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
-//            ]
-//        ),
+        //        .testTarget(
+        //            name: "AppFeatureTests",
+        //            dependencies: [
+        //                "AppFeature",
+        //                "TestHelpers",
+        //                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
+        //            ]
+        //        ),
         .testTarget(
             name: "RegionalWeatherFeatureTests",
             dependencies: [
-                "RegionalWeatherFeature",
-//                "TestHelpers",
-//                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
+                "RegionalWeatherFeature"
+                //                "TestHelpers",
+                //                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
             ]
         ),
     ]

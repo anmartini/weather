@@ -5,9 +5,9 @@
 //  Created by Roberto Casula on 07/04/21.
 //
 
-import SwiftUI
-import SharedModels
 import SharedExtensions
+import SharedModels
+import SwiftUI
 import SwiftUINavigation
 
 struct CountryDayView: View {
@@ -68,14 +68,15 @@ struct CountryDayView_Previews: PreviewProvider {
                 CountryDayView(
                     countryDay: .init(
                         day: Date(),
-                        forecast: "<p>Sereno tutta la <b>giornata</b>.</p><p>Temperature massime pomeridiane comprese tra 14° sui rilievi e 19° in pianura.</p><p>Velocità massima del vento compresa tra 15 (sui rilievi) e 19 km/h (in pianura).</p>",
+                        forecast:
+                            "<p>Sereno tutta la <b>giornata</b>.</p><p>Temperature massime pomeridiane comprese tra 14° sui rilievi e 19° in pianura.</p><p>Velocità massima del vento compresa tra 15 (sui rilievi) e 19 km/h (in pianura).</p>",
                         updatedAt: Date(),
                         zones: [
                             .init(
                                 code: "P",
                                 name: "pianura e capoluogo",
                                 forecast: .init(
-                                    rain: "rain", // nil
+                                    rain: "rain",  // nil
                                     wind: 32,
                                     temperature: .init(
                                         min: 15,
@@ -109,14 +110,14 @@ struct CountryDayView_Previews: PreviewProvider {
                                                 en: "decreasing cloudiness tendency"
                                             )
                                         )
-                                    )
+                                    ),
                                 ]
                             ),
                             .init(
                                 code: "C",
                                 name: "collina",
                                 forecast: .init(
-                                    rain: "rain", // nil
+                                    rain: "rain",  // nil
                                     wind: 32,
                                     temperature: .init(
                                         min: 15,
@@ -150,7 +151,7 @@ struct CountryDayView_Previews: PreviewProvider {
                                                 en: "decreasing cloudiness tendency"
                                             )
                                         )
-                                    )
+                                    ),
                                 ]
                             ),
                             .init(
@@ -184,9 +185,9 @@ struct CountryDayView_Previews: PreviewProvider {
                                                 en: "decreasing cloudiness tendency"
                                             )
                                         )
-                                    )
+                                    ),
                                 ]
-                            )
+                            ),
                         ]
                     )
                 )

@@ -5,9 +5,9 @@
 //  Created by Roberto Casula on 03/04/21.
 //
 
+import ComposableArchitecture
 import Foundation
 import SharedModels
-import ComposableArchitecture
 
 public enum RegionalWeatherAction: Equatable {
     case onAppear

@@ -24,7 +24,8 @@ public let regionalWeatherFeatureReducer = Reducer<
         state.regionalDaysRequestError = nil
         return Effect.task {
             await TaskResult {
-                try await withThrowingTaskGroup(of: RegionalDay.self, returning: [RegionalDay].self) { group in
+                try await withThrowingTaskGroup(of: RegionalDay.self, returning: [RegionalDay].self)
+                { group in
                     for day in days {
                         group.addTask(priority: .background) {
                             try await environment.apiClient
@@ -35,9 +36,11 @@ public let regionalWeatherFeatureReducer = Reducer<
                         }
                     }
 
-                    return try await group.reduce(into: [RegionalDay](), { result, countryDay in
-                        result.append(countryDay)
-                    })
+                    return try await group.reduce(
+                        into: [RegionalDay](),
+                        { result, countryDay in
+                            result.append(countryDay)
+                        })
                 }
             }
         }

@@ -5,11 +5,10 @@
 //  Created by Roberto Casula on 07/04/21.
 //
 
+import ComposableArchitecture
 import CountryFeature
 import Foundation
 import SharedModels
-import CountryFeature
-import ComposableArchitecture
 
 public enum CountriesAction: Equatable {
 

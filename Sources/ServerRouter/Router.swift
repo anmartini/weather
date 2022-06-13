@@ -10,8 +10,9 @@ import Parsing
 import SharedModels
 import URLRouting
 import XCTestDynamicOverlay
+
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+    import FoundationNetworking
 #endif
 
 public struct ServerRouter: ParserPrinter {
@@ -40,7 +41,10 @@ public struct ServerRouter: ParserPrinter {
     var apiRouter: AnyParserPrinter<URLRequestData, ServerRoute.Api.Route> {
         OneOf {
             Route(.case(ServerRoute.Api.Route.countries)) {
-                Path { "daily"; "countries" }
+                Path {
+                    "daily"
+                    "countries"
+                }
             }
 
             Route(.case(ServerRoute.Api.Route.regionalDay(day:))) {
@@ -85,35 +89,35 @@ public struct ServerRouter: ParserPrinter {
 }
 
 #if DEBUG
-extension ServerRouter {
-    public static let test = Self(
-        date: { Date(timeIntervalSince1970: 1_234_567_890) },
-        decoder: jsonDecoder,
-        encoder: jsonEncoder
-    )
+    extension ServerRouter {
+        public static let test = Self(
+            date: { Date(timeIntervalSince1970: 1_234_567_890) },
+            decoder: jsonDecoder,
+            encoder: jsonEncoder
+        )
 
-    public static let failing = Self(
-        date: {
-            XCTFail("\(Self.self).date is unimplemented")
-            return .init()
-        },
-        decoder: jsonDecoder,
-        encoder: jsonEncoder
-    )
-}
+        public static let failing = Self(
+            date: {
+                XCTFail("\(Self.self).date is unimplemented")
+                return .init()
+            },
+            decoder: jsonDecoder,
+            encoder: jsonEncoder
+        )
+    }
 
-private let jsonEncoder = { () -> JSONEncoder in
-    let encoder = JSONEncoder()
-    encoder.outputFormatting = .sortedKeys
-    encoder.dateEncodingStrategy = .secondsSince1970
-    return encoder
-}()
+    private let jsonEncoder = { () -> JSONEncoder in
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        encoder.dateEncodingStrategy = .secondsSince1970
+        return encoder
+    }()
 
-private let jsonDecoder = { () -> JSONDecoder in
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .secondsSince1970
-    return decoder
-}()
+    private let jsonDecoder = { () -> JSONDecoder in
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        return decoder
+    }()
 #endif
 
 extension Body {
@@ -121,4 +125,3 @@ extension Body {
         self.init { Rest<Bytes.Input>().replaceError(with: .init()) }
     }
 }
-

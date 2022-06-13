@@ -6,9 +6,9 @@
 //
 
 import ApiClient
+import ComposableArchitecture
 import Foundation
 import SharedModels
-import ComposableArchitecture
 
 public struct CountryEnvironment {
     public var apiClient: ApiClient

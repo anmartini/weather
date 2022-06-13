@@ -15,10 +15,12 @@ public struct Shimmer: ViewModifier {
 
     public func body(content: Content) -> some View {
         content
-            .modifier(AnimatedMask(phase: phase).animation(
-                Animation.linear(duration: duration)
-                    .repeatForever(autoreverses: bounce)
-            ))
+            .modifier(
+                AnimatedMask(phase: phase).animation(
+                    Animation.linear(duration: duration)
+                        .repeatForever(autoreverses: bounce)
+                )
+            )
             .onAppear { phase = 0.8 }
     }
 
@@ -45,24 +47,25 @@ public struct Shimmer: ViewModifier {
         let edgeColor = Color.black.opacity(0.3)
 
         var body: some View {
-            LinearGradient(gradient:
-                            Gradient(stops: [
-                                .init(color: edgeColor, location: phase),
-                                .init(color: centerColor, location: phase + 0.1),
-                                .init(color: edgeColor, location: phase + 0.2)
-                            ]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(
+                gradient:
+                    Gradient(stops: [
+                        .init(color: edgeColor, location: phase),
+                        .init(color: centerColor, location: phase + 0.1),
+                        .init(color: edgeColor, location: phase + 0.2),
+                    ]), startPoint: .topLeading, endPoint: .bottomTrailing)
         }
     }
 }
 
-public extension View {
+extension View {
     /// Adds an animated shimmering effect to any view, typically to show that
     /// an operation is in progress.
     /// - Parameters:
     ///   - active: Convenience parameter to conditionally enable the effect. Defaults to `true`.
     ///   - duration: The duration of a shimmer cycle in seconds. Default: `1.5`.
     ///   - bounce: Whether to bounce (reverse) the animation back and forth. Defaults to `false`.
-    @ViewBuilder func shimmering(
+    @ViewBuilder public func shimmering(
         active: Bool = true, duration: Double = 1.5, bounce: Bool = false
     ) -> some View {
         if active {
@@ -74,23 +77,23 @@ public extension View {
 }
 
 #if DEBUG
-struct Shimmer_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            Text("SwiftUI Shimmer")
-            if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
-                Text("SwiftUI Shimmer").preferredColorScheme(.light)
-                Text("SwiftUI Shimmer").preferredColorScheme(.dark)
-                VStack(alignment: .leading) {
-                    Text("Loading...").font(.title)
-                    Text(String(repeating: "Shimmer", count: 12))
-                        .redacted(reason: .placeholder)
-                }.frame(maxWidth: 200)
+    struct Shimmer_Previews: PreviewProvider {
+        static var previews: some View {
+            Group {
+                Text("SwiftUI Shimmer")
+                if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
+                    Text("SwiftUI Shimmer").preferredColorScheme(.light)
+                    Text("SwiftUI Shimmer").preferredColorScheme(.dark)
+                    VStack(alignment: .leading) {
+                        Text("Loading...").font(.title)
+                        Text(String(repeating: "Shimmer", count: 12))
+                            .redacted(reason: .placeholder)
+                    }.frame(maxWidth: 200)
+                }
             }
+            .padding()
+            .shimmering()
+            .previewLayout(.sizeThatFits)
         }
-        .padding()
-        .shimmering()
-        .previewLayout(.sizeThatFits)
     }
-}
 #endif

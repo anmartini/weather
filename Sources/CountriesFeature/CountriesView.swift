@@ -6,9 +6,6 @@
 //
 
 import ApiClient
-import SwiftUI
-import SharedModels
-import CountryFeature
 import ComposableArchitecture
 import CountryFeature
 import SharedModels
@@ -49,7 +46,7 @@ public struct CountriesView: View {
                     }
                 }
             }
-            .onAppear() {
+            .onAppear {
                 viewStore.send(.onAppear)
             }
         }
@@ -82,7 +79,7 @@ struct CountriesView_Previews: PreviewProvider {
                             Country(
                                 code: "FE",
                                 name: "Ferrara"
-                            )
+                            ),
                         ],
                         isCountriesRequestInFlight: false
                     ),
@@ -103,7 +100,7 @@ struct CountriesView_Previews: PreviewProvider {
                         apiClient.override(
                             routeCase: /ServerRoute.Api.Route.countries,
                             withResponse: { _ in
-                                try await Task.sleep(nanoseconds: 3000000000)
+                                try await Task.sleep(nanoseconds: 3_000_000_000)
                                 return ok(
                                     [
                                         Country(
@@ -121,7 +118,7 @@ struct CountriesView_Previews: PreviewProvider {
                                         Country(
                                             code: "FE",
                                             name: "Ferrara"
-                                        )
+                                        ),
                                     ]
                                 )
                             }

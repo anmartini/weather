@@ -2,11 +2,11 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 #if os(macOS)
-  import AppKit
+    import AppKit
 #elseif os(iOS)
-  import UIKit
+    import UIKit
 #elseif os(tvOS) || os(watchOS)
-  import UIKit
+    import UIKit
 #endif
 
 // Deprecated typealiases
@@ -17,10 +17,10 @@
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum Asset {
-  public enum Colors {
-  }
-  public enum Images {
-  }
+    public enum Colors {
+    }
+    public enum Images {
+    }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

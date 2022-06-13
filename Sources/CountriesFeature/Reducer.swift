@@ -6,8 +6,8 @@
 //
 
 import ComposableArchitecture
-import SharedModels
 import CountryFeature
+import SharedModels
 
 public let countriesReducer = Reducer<CountriesState, CountriesAction, CountriesEnvironment>
     .combine(

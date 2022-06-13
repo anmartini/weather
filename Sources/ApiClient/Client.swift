@@ -1,6 +1,6 @@
 //
 //  Client.swift
-//  
+//
 //
 //  Created by Roberto Casula on 02/04/21.
 //
@@ -11,13 +11,16 @@ import SharedModels
 public struct ApiClient {
 
     public var request: (ServerRoute) async throws -> (value: Data, response: URLResponse)
-    public var apiRequest: (ServerRoute.Api.Route) async throws -> (value: Data, response: URLResponse)
+    public var apiRequest:
+        (ServerRoute.Api.Route) async throws -> (value: Data, response: URLResponse)
     public var baseUrl: () -> URL
     public var setBaseUrl: (URL) async -> Void
 
     public init(
         request: @escaping (ServerRoute) async throws -> (value: Data, response: URLResponse),
-        apiRequest: @escaping (ServerRoute.Api.Route) async throws -> (value: Data, response: URLResponse),
+        apiRequest: @escaping (ServerRoute.Api.Route) async throws -> (
+            value: Data, response: URLResponse
+        ),
         baseUrl: @escaping () -> URL,
         setBaseUrl: @escaping (URL) async -> Void
     ) {
@@ -49,15 +52,15 @@ public struct ApiClient {
         } catch {
             throw ApiError(error: error)
         }
-#if DEBUG
-        print(
-        """
-          API: route: \(route), \
-          status: \((response as? HTTPURLResponse)?.statusCode ?? 0), \
-          receive data: \(String(decoding: data, as: UTF8.self))
-        """
-        )
-#endif
+        #if DEBUG
+            print(
+                """
+                  API: route: \(route), \
+                  status: \((response as? HTTPURLResponse)?.statusCode ?? 0), \
+                  receive data: \(String(decoding: data, as: UTF8.self))
+                """
+            )
+        #endif
         let value: A
         do {
             value = try decoder.decode(A.self, from: data)
@@ -84,15 +87,15 @@ public struct ApiClient {
         } catch {
             throw ApiError(error: error)
         }
-#if DEBUG
-        print(
-        """
-          API: route: \(route), \
-          status: \((response as? HTTPURLResponse)?.statusCode ?? 0), \
-          receive data: \(String(decoding: data, as: UTF8.self))
-        """
-        )
-#endif
+        #if DEBUG
+            print(
+                """
+                  API: route: \(route), \
+                  status: \((response as? HTTPURLResponse)?.statusCode ?? 0), \
+                  receive data: \(String(decoding: data, as: UTF8.self))
+                """
+            )
+        #endif
         let value: A
         do {
             value = try decoder.decode(A.self, from: data)
@@ -109,61 +112,63 @@ public struct ApiClient {
 }
 
 #if DEBUG
-import XCTestDebugSupport
-import XCTestDynamicOverlay
-import CasePaths
+    import XCTestDebugSupport
+    import XCTestDynamicOverlay
+    import CasePaths
 
-extension ApiClient {
-    struct Unimplemented: Error {}
-    public static let failing = Self(
-        request: { route in
-            XCTFail("\(Self.self).request(\(route)) is unimplemented")
-            throw Unimplemented()
-        },
-        apiRequest: { route in
-            XCTFail("\(Self.self).apiRequest(\(route)) is unimplemented")
-            throw Unimplemented()
-        },
+    extension ApiClient {
+        struct Unimplemented: Error {}
+        public static let failing = Self(
+            request: { route in
+                XCTFail("\(Self.self).request(\(route)) is unimplemented")
+                throw Unimplemented()
+            },
+            apiRequest: { route in
+                XCTFail("\(Self.self).apiRequest(\(route)) is unimplemented")
+                throw Unimplemented()
+            },
 
-        baseUrl: {
-            XCTFail("\(Self.self).baseUrl is unimplemented")
-            return .init(string: "/")!
-        },
-        setBaseUrl: { _ in
-            XCTFail("ApiClient.setBaseUrl is unimplemented")
+            baseUrl: {
+                XCTFail("\(Self.self).baseUrl is unimplemented")
+                return .init(string: "/")!
+            },
+            setBaseUrl: { _ in
+                XCTFail("ApiClient.setBaseUrl is unimplemented")
+            }
+        )
+
+        public mutating func override(
+            route matchingRoute: ServerRoute.Api.Route,
+            withResponse response: @escaping () async throws -> (value: Data, response: URLResponse)
+        ) {
+            let fulfill = expectation(description: "route")
+            self.apiRequest = { [self] route in
+                if route == matchingRoute {
+                    fulfill()
+                    return try await response()
+                } else {
+                    return try await self.apiRequest(route)
+                }
+            }
         }
-    )
 
-    public mutating func override(
-        route matchingRoute: ServerRoute.Api.Route,
-        withResponse response: @escaping () async throws -> (value: Data, response: URLResponse)
-    ) {
-        let fulfill = expectation(description: "route")
-        self.apiRequest = { [self] route in
-            if route == matchingRoute {
-                fulfill()
-                return try await response()
-            } else {
-                return try await self.apiRequest(route)
+        public mutating func override<Value>(
+            routeCase matchingRoute: CasePath<ServerRoute.Api.Route, Value>,
+            withResponse response: @escaping (Value) async throws -> (
+                value: Data, response: URLResponse
+            )
+        ) {
+            let fulfill = expectation(description: "route")
+            self.apiRequest = { [self] route in
+                if let value = matchingRoute.extract(from: route) {
+                    fulfill()
+                    return try await response(value)
+                } else {
+                    return try await self.apiRequest(route)
+                }
             }
         }
     }
-
-    public mutating func override<Value>(
-        routeCase matchingRoute: CasePath<ServerRoute.Api.Route, Value>,
-        withResponse response: @escaping (Value) async throws -> (value: Data, response: URLResponse)
-    ) {
-        let fulfill = expectation(description: "route")
-        self.apiRequest = { [self] route in
-            if let value = matchingRoute.extract(from: route) {
-                fulfill()
-                return try await response(value)
-            } else {
-                return try await self.apiRequest(route)
-            }
-        }
-    }
-}
 #endif
 
 extension ApiClient {
